@@ -8,9 +8,7 @@ import org.springframework.boot.web.servlet.context.ServletWebServerApplicationC
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @Slf4j
@@ -22,6 +20,8 @@ public class TestController {
     @GetMapping("/test")
     public Map<String, Object> executePost(HttpServletRequest request) {
         log.info("test CALL CAME = ==  " + new Date() + ".");
+        System.out.println("Inside test end point");
+        printRequestParameters(request);
         Map<String, Object> result = new HashMap<>();
 
 
@@ -36,4 +36,34 @@ public class TestController {
 
     }
 
+    @GetMapping("/message")
+    public String processMessage(String xmlMessage) {
+        log.info("test CALL CAME = ==  " + new Date() + ".");
+        return "Message received and its @ " + new Date() + " and its getting processed";
+    }
+
+    @GetMapping("/holdTransactions")
+    public List<String> holdTransactions(HttpServletRequest request) {
+        log.info("holdTransactions CALL CAME = ==  " + new Date() + ".");
+        return Arrays.asList("Transaction ID 1 " + new Date(), "Transaction ID 2 " + new Date());
+    }
+
+    @GetMapping("/reprocess")
+    public String reprocess(String transactionId, String transactionFunction) {
+        log.info("reprocess CALL CAME = ==  " + new Date() + ".");
+        return transactionId + " : " + transactionFunction + " has been received and forwarded for re processing";
+    }
+
+    private void printRequestParameters(HttpServletRequest request) {
+        Enumeration<String> parameterNames = request.getParameterNames();
+
+        while (parameterNames.hasMoreElements()) {
+            String paramName = parameterNames.nextElement();
+            String[] paramValues = request.getParameterValues(paramName);
+
+            for (String paramValue : paramValues) {
+                System.out.println(paramName + " = " + paramValue);
+            }
+        }
+    }
 }
