@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
         DataSourceAutoConfiguration.class}
 )
 
-public class AtsService {
+public class AdaptorApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(AtsService.class, args);
+        SpringApplication.run(AdaptorApp.class, args);
     }
 
 

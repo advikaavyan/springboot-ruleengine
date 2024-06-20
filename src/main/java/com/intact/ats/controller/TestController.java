@@ -21,7 +21,7 @@ public class TestController {
     public Map<String, Object> executePost(HttpServletRequest request) {
         log.info("test CALL CAME = ==  " + new Date() + ".");
         System.out.println("Inside test end point");
-        printRequestParameters(request);
+        new RequestPrintHelper().printAll(request);
         Map<String, Object> result = new HashMap<>();
 
 
@@ -54,16 +54,6 @@ public class TestController {
         return transactionId + " : " + transactionFunction + " has been received and forwarded for re processing";
     }
 
-    private void printRequestParameters(HttpServletRequest request) {
-        Enumeration<String> parameterNames = request.getParameterNames();
 
-        while (parameterNames.hasMoreElements()) {
-            String paramName = parameterNames.nextElement();
-            String[] paramValues = request.getParameterValues(paramName);
 
-            for (String paramValue : paramValues) {
-                System.out.println(paramName + " = " + paramValue);
-            }
-        }
-    }
 }
