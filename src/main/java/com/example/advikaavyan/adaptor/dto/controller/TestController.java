@@ -1,4 +1,4 @@
-package com.intact.ats.controller;
+package com.example.advikaavyan.adaptor.dto.controller;
 
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,11 +36,7 @@ public class TestController {
 
     }
 
-    @GetMapping("/message")
-    public String processMessage(String xmlMessage) {
-        log.info("test CALL CAME = ==  " + new Date() + ".");
-        return "Message received and its @ " + new Date() + " and its getting processed";
-    }
+
 
     @GetMapping("/holdTransactions")
     public List<String> holdTransactions(HttpServletRequest request) {

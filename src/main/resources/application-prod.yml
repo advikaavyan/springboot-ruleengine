@@ -1,0 +1,4 @@
+spring.datasource.driver-class-name: com.mysql.jdbc.Driver
+spring.datasource.url: jdbc:mysql://mysql:3306/adaptor_db
+spring.datasource.username: adaptor_user
+spring.datasource.password: userpassword

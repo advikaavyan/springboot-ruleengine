@@ -1,4 +1,4 @@
-package com.intact.ats.controller;
+package com.example.advikaavyan.adaptor.dto.controller;
 
 
 import jakarta.servlet.http.HttpServletRequest;

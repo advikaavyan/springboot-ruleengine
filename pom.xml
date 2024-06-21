@@ -10,7 +10,7 @@
 </parent>
 <groupId>com.advikavyan.examples</groupId>
 <artifactId>adaptor-app</artifactId>
-<version>1.0.2</version>
+<version>1.0.3</version>
 <name>adaptor-app</name>
 <description>adaptor-app</description>
 <properties>
@@ -53,6 +53,15 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.31</version>
+    </dependency>
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jdbc</artifactId>
     </dependency>
 
 </dependencies>
