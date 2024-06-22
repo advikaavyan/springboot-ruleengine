@@ -1,4 +1,4 @@
-package com.example.advikaavyan.adaptor.dto.controller;
+package com.example.advikaavyan.adaptor.controller;
 
 
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,5 +1,6 @@
 package com.example.advikaavyan.adaptor.entity;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
