@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: adaptor-app
+info.app.name: adaptor-app
+info.app.version: 1.0.6
+
+application.title:  adaptor-app
+application.version: 1.0.6
+server:
+  port: 8080
