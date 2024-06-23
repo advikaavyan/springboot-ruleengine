@@ -10,7 +10,7 @@
 </parent>
 <groupId>com.advikavyan.examples</groupId>
 <artifactId>adaptor-app</artifactId>
-<version>1.0.6</version>
+<version>1.0.7</version>
 <name>adaptor-app</name>
 <description>adaptor-app</description>
 <properties>
