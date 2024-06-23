@@ -1,5 +1,6 @@
 package com.example.advikaavyan.adaptor.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,6 +20,7 @@ public class Signature {
 
     @ManyToOne
     @JoinColumn(name = "Message_ID", nullable = false)
+    @JsonBackReference // for testing purpose we should not return whole obejct to caller
     private IncomingMessage incomingMessage;
 
     private String signatureKey;

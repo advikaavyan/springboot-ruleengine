@@ -32,7 +32,7 @@ public class MessageService {
     private OutgoingMessageRepository outgoingMessageRepository;
 
     @Transactional
-    public void processMessage(MessageDTO messageDTO) {
+    public IncomingMessage processMessage(MessageDTO messageDTO) {
         IncomingMessage incomingMessage = new IncomingMessage();
         incomingMessage.setMessageIdentifier(messageDTO.getMessageIdentifier());
         incomingMessage.setSource(messageDTO.getSource());
@@ -69,6 +69,7 @@ public class MessageService {
             tracker.setInFlight(legDTO.isInFlight());
             messageFlowTrackerRepository.save(tracker);
         }*/
+        return incomingMessage;
     }
 
     public void updateRecord(Long id, String status) {

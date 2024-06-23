@@ -1,6 +1,8 @@
 package com.example.advikaavyan.adaptor.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -41,6 +43,7 @@ public class IncomingMessage {
     private List<Signature> signatures;
 
     @OneToMany(mappedBy = "incomingMessage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<MessageFlowTracker> messageFlowTrackers;
 
     @Override

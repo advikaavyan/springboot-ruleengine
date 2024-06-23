@@ -1,6 +1,8 @@
 package com.example.advikaavyan.adaptor.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,6 +24,7 @@ public class MessageFlowTracker {
 
     @ManyToOne
     @JoinColumn(name = "Message_ID", nullable = false)
+    @JsonBackReference // for testing purpose we should not return whole obejct to caller
     private IncomingMessage incomingMessage;
 
 
@@ -51,6 +54,7 @@ public class MessageFlowTracker {
     private Set<OutgoingMessage> outgoingMessages;*/
 
     @OneToOne(mappedBy = "messageFlowTracker", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
+    @JsonManagedReference
     private OutgoingMessage outgoingMessage;
 
    /* @Override
