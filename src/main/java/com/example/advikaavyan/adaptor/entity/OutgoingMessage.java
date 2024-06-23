@@ -4,25 +4,57 @@ package com.example.advikaavyan.adaptor.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
-@Table(name = "OUTGOING_MESSAGE")
 @Data
+@Table(name = "Outgoing_Message")
 public class OutgoingMessage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "MESSAGE_ID")
-    private Long messageId;
-    @Column(name = "MESSAGE_TYPE", nullable = false)
-    private String messageType;
-    @Column(name = "MESSAGE", nullable = false, columnDefinition = "TEXT")
-    private String message;
-    @Column(name = "CREATED_AT", nullable = false, updatable = false, insertable = false,
-            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "INCOMING_MESSAGE_ID", nullable = false)
-    private IncomingMessage incomingMessage;
 
+    @Id
+  /*  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "outgoing_message_seq")
+    @SequenceGenerator(name = "outgoing_message_seq", sequenceName = "outgoing_message_seq", allocationSize = 1)*/
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long outgoingMessageId;
+
+  /*  @ManyToOne
+    @JoinColumn(name = "Message_Flow_Tracker_ID", nullable = false)
+    private MessageFlowTracker messageFlowTracker;*/
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Message_Flow_Tracker_ID", unique = true, nullable = false)
+    private MessageFlowTracker messageFlowTracker;
+
+    private String legType;
+    @Column(name = "createdAt", nullable = false, updatable = false, insertable = false,
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+
+    private Timestamp createdAt;
+    private String outgoingMessage;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OutgoingMessage that = (OutgoingMessage) o;
+        return  Objects.equals(messageFlowTracker, that.messageFlowTracker) && Objects.equals(legType, that.legType) ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash( messageFlowTracker, legType);
+    }
+
+/*    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OutgoingMessage outGoing = (OutgoingMessage) o;
+        return Objects.equals(outgoingMessageId, outGoing.outgoingMessageId);  // Use ID for equality comparison
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(outgoingMessageId);  // Use ID for hash code calculation
+    }*/
 }

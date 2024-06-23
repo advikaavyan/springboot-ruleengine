@@ -1,7 +1,8 @@
-package com.example.advikaavyan.adaptor.dao;
+package com.example.advikaavyan.adaptor.mycode;
 
-import com.example.advikaavyan.adaptor.entity.OutgoingMessage;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface OutgoingMessageRepository extends JpaRepository<OutgoingMessage, Long> {
 }

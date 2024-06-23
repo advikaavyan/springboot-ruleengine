@@ -1,37 +1,55 @@
 package com.example.advikaavyan.adaptor.controller;
 
-
-import com.example.advikaavyan.adaptor.dto.InMessage;
-import com.example.advikaavyan.adaptor.dto.InMessageResponse;
+import com.example.advikaavyan.adaptor.dto.MessageDTO;
 import com.example.advikaavyan.adaptor.service.MessageService;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.StringReader;
 
 @RestController
-@RequestMapping("/messages")
 @Slf4j
+@RequestMapping("/api/messages")
 public class MessageController {
 
-    private final MessageService messageService;
-
     @Autowired
-    public MessageController(MessageService messageService) {
-        this.messageService = messageService;
+    private MessageService messageService;
+
+    @PostMapping
+    public ResponseEntity<String> receiveMessage(@RequestBody String xmlMessage) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(MessageDTO.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            MessageDTO messageDTO = (MessageDTO) unmarshaller.unmarshal(new StringReader(xmlMessage));
+            messageService.processMessage(messageDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Message processed successfully");
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid XML format");
+        }
     }
 
-    /*  @PostMapping("/incoming")
-      public IncomingMessage saveIncomingMessage(@RequestBody IncomingMessage incomingMessage) {
-          return messageService.saveIncomingAndOutgoingMessages(incomingMessage);
-      }*/
-    @GetMapping("/incoming/{data}")
-    public InMessageResponse saveIncomingMessage(@PathVariable String data) {
-        log.info("Request received: message = {}", data);
-        InMessage inMessage = InMessage.builder().source("REST_API").message(data).build();
-        return messageService.saveIncomingAndOutgoingMessages(inMessage);
+    @PostMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam String status) {
+        messageService.updateRecord(id, status);
+        return ResponseEntity.ok("Status updated successfully");
     }
+
+    @GetMapping("/{data}")
+    public ResponseEntity<String> saveIncomingMessage(@PathVariable String data) {
+        log.info("Request received: message = {}", data);
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setMessage(data);
+        messageDTO.setSource("TIM");
+        messageService.processMessage(messageDTO);
+        return ResponseEntity.ok("Status updated successfully");
+    }
+
 
 }

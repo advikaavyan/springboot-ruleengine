@@ -1,8 +1,10 @@
 package com.example.advikaavyan.adaptor.util;
 
+import java.util.stream.Collectors;
+
 public class MessageTransformer {
 
-    /*public static IncomingMessage toIncomingMessage(InMessage inMessage) {
+ /*   public static IncomingMessage toIncomingMessage(InMessage inMessage) {
         IncomingMessage incomingMessage = new IncomingMessage();
         incomingMessage.setMessage(inMessage.getMessage());
         incomingMessage.setSource(inMessage.getSource());
@@ -27,7 +29,7 @@ public class MessageTransformer {
                 }).collect(Collectors.toList())
         );
         return inMessageResponse;
-    }*/
-    // Map to DTO
+    }
+    // Map to DTO*/
 
 }
