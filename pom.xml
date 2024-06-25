@@ -10,7 +10,7 @@
 </parent>
 <groupId>com.advikavyan.examples</groupId>
 <artifactId>adaptor-app</artifactId>
-<version>1.0.7</version>
+<version>1.0.8</version>
 <name>adaptor-app</name>
 <description>adaptor-app</description>
 <properties>
@@ -85,7 +85,8 @@
             <version>3.4.0</version>
             <configuration>
                 <to>
-                    <image>docker.io/advikaavyan/adaptor-app-${project.version}</image>
+                   <!-- <image>docker.io/advikaavyan/adaptor-app-${project.version}</image>-->
+                    <image>docker.io/advikaavyan/adaptor-app</image>
                 </to>
             </configuration>
         </plugin>
