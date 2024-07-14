@@ -1,6 +1,6 @@
 package com.example.advikaavyan.adaptor.service;
 
-import com.example.advikaavyan.adaptor.dto.MessageDTO;
+import com.example.advikaavyan.adaptor.model.dto.MessageDTO;
 import com.example.advikaavyan.adaptor.dao.SignatureRepository;
 import com.example.advikaavyan.adaptor.dao.IncomingMessageRepository;
 import com.example.advikaavyan.adaptor.dao.MessageFlowTrackerRepository;

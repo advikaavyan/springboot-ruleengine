@@ -1,8 +1,8 @@
 package com.example.advikaavyan.adaptor.controller;
 
 import com.example.advikaavyan.adaptor.api.MessageApi;
-import com.example.advikaavyan.adaptor.dto.AdaptorApiResponse;
-import com.example.advikaavyan.adaptor.dto.MessageDTO;
+import com.example.advikaavyan.adaptor.model.dto.AdaptorApiResponse;
+import com.example.advikaavyan.adaptor.model.dto.MessageDTO;
 import com.example.advikaavyan.adaptor.entity.IncomingMessage;
 import com.example.advikaavyan.adaptor.service.MessageService;
 import lombok.extern.slf4j.Slf4j;

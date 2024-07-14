@@ -1,0 +1,10 @@
+{
+  "date": "2023-07-14T10:15:30Z",
+  "accountNumber": "TestAccount",
+  "messageFunction": "NEW",
+  "messageType": "PAYMENT",
+  "amount": 1500.00,
+  "currency": "USD",
+  "version": 3,
+  "transactionId": "TXN123456789"
+}

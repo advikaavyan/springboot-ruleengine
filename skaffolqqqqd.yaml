@@ -1,0 +1,26 @@
+apiVersion: skaffold/v2beta19
+kind: Config
+metadata:
+  name: adaptor-app
+#build:
+#  artifacts:
+#    - image: docker.io/advikaavyan/adaptor-app
+#      jib:
+#        project: adaptor-app
+#  tagPolicy:
+#    gitCommit: { }
+deploy:
+  kubectl:
+    manifests:
+      - kustomization.yaml
+profiles:
+  - name: dev
+    deploy:
+      kubectl:
+        manifests:
+          - kustomization.yaml
+  - name: prod
+    deploy:
+      kubectl:
+        manifests:
+          - kustomization.yaml

@@ -4,21 +4,48 @@ metadata:
   name: adaptor-app
 build:
   artifacts:
-    - image: docker.io/advikaavyan/adaptor-app
+    - image: advikaavyan/adaptor-app
       jib:
-        project: adaptor-app
-deploy:
-  kubectl:
-    manifests:
-      - kustomization.yaml
-profiles:
-  - name: dev
-    deploy:
-      kubectl:
-        manifests:
-          - kustomization.yaml
-  - name: prod
-    deploy:
-      kubectl:
-        manifests:
-          - kustomization.yaml
+#        type: maven
+        args:
+          - -Pjib
+  tagPolicy:
+    gitCommit: { }
+#
+#
+#  PS D:\toBeRenoved\adaptor-app> skaffold dev
+#  Generating tags...
+#  - advikaavyan/adaptor-app-1.0.7 -> advikaavyan/adaptor-app-1.0.7:latest
+#  Some taggers failed. Rerun with -vdebug for errors.
+#  Checking cache...
+#  - advikaavyan/adaptor-app-1.0.7: Found Locally
+#Tags used in deployment:
+#  - advikaavyan/adaptor-app-1.0.7 -> advikaavyan/adaptor-app-1.0.7:2969dbd69d97c05721c3de5f2b4d60a59bbd42ac0686263a921e235762270d17
+#  Starting deploy...
+#- deployment.apps/adaptor-app created
+#- service/adaptor-app-service-load-balancer created
+#  Waiting for deployments to stabilize...
+#- deployment/adaptor-app: creating container adaptor-app
+#                            - pod/adaptor-app-bd6cfbcd8-ggrh2: creating container adaptor-app
+#- deployment/adaptor-app is ready.
+#  Deployments stabilized in 30.317 seconds
+#  Listing files to watch...
+#- advikaavyan/adaptor-app-1.0.7
+#  Press Ctrl+C to exit
+#  Watching for changes...
+#  Generating tags...
+#- advikaavyan/adaptor-app-1.0.7 -> advikaavyan/adaptor-app-1.0.7:latest
+#  Some taggers failed. Rerun with -vdebug for errors.
+#  Checking cache...
+#- advikaavyan/adaptor-app-1.0.7: Found Locally
+#Tags used in deployment:
+#  - advikaavyan/adaptor-app-1.0.7 -> advikaavyan/adaptor-app-1.0.7:2969dbd69d97c05721c3de5f2b4d60a59bbd42ac0686263a921e235762270d17
+#  Starting deploy...
+#- deployment.apps/adaptor-app configured
+#- service/adaptor-app-service-load-balancer configured
+#  Waiting for deployments to stabilize...
+#  Deployments stabilized in 16.1393ms
+#  Listing files to watch...
+#- advikaavyan/adaptor-app-1.0.7
+#  Press Ctrl+C to exit
+#  Watching for changes...

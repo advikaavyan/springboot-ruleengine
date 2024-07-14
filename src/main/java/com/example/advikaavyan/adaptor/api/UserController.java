@@ -1,6 +1,6 @@
 package com.example.advikaavyan.adaptor.api;
 
-import com.example.advikaavyan.adaptor.dto.User;
+import com.example.advikaavyan.adaptor.model.dto.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,7 +1,6 @@
 package com.example.advikaavyan.adaptor.api;
 
-import com.example.advikaavyan.adaptor.dto.AdaptorApiResponse;
-import com.example.advikaavyan.adaptor.dto.MessageDTO;
+import com.example.advikaavyan.adaptor.model.dto.AdaptorApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
