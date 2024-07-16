@@ -1,6 +1,6 @@
 package com.example.advikaavyan.adaptor.controller;
 
-import com.example.advikaavyan.adaptor.service.MessageService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/update")
 public class UpdateController {
 
-    @Autowired
-    private MessageService messageService;
+/*    @Autowired
+    private MessageService messageService;*/
 
 
     @GetMapping("/{id}")
     public ResponseEntity<String> updateAAAAA(@PathVariable Long id) {
-        messageService.updateRecord(id);
+       // messageService.updateRecord(id);
         return ResponseEntity.ok("Status updated successfully");
     }
 }

@@ -1,11 +1,9 @@
 package com.example.poc.flow.impl;
 
 import com.example.poc.flow.Flow;
-
 import com.example.poc.flow.model.base.BaseContext;
 import com.example.poc.flow.model.base.Message;
 import com.example.poc.flow.processor.ContextBuilder;
-import com.example.flow.processor.impl.*;
 import com.example.poc.flow.processor.impl.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -47,8 +45,10 @@ public class STPFlow implements Flow {
         baseContext = matchingProcessor.execute(baseContext);
         baseContext = stateTransitioningProcessor.execute(baseContext);
         baseContext = legCreationProcessor.execute(baseContext);
-        baseContext = stateTransitioningProcessor.execute(baseContext);
+
         baseContext = navHolProcessor.execute(baseContext);
+        baseContext = stateTransitioningProcessor.execute(baseContext);
+
         baseContext = outboundProcessor.execute(baseContext);
         baseContext = persistProcessor.execute(baseContext);
         baseContext = publishProcessor.execute(baseContext);

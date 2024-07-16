@@ -2,10 +2,8 @@ package com.example.poc.flow.model.base;
 
 public enum TransactionKey {
 
-    A("A"),
-    B("B"),
-    C("C"),
-
+    NEWM("NEWM"),
+    CANC("CANC"),
     NONE("NONE");
 
     private String key;

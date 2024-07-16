@@ -3,8 +3,8 @@ package com.example.advikaavyan.adaptor.controller;
 import com.example.advikaavyan.adaptor.api.MessageApi;
 import com.example.advikaavyan.adaptor.model.dto.AdaptorApiResponse;
 import com.example.advikaavyan.adaptor.model.dto.MessageDTO;
-import com.example.advikaavyan.adaptor.entity.IncomingMessage;
-import com.example.advikaavyan.adaptor.service.MessageService;
+ ;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,29 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/messages")
 
-public class MessageController implements MessageApi {
+public class MessageController   {
 
-    @Autowired
-    private MessageService messageService;
+   /* @Autowired
+  //  private MessageService messageService;
 
-    @Override
+
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity<AdaptorApiResponse> createMessage(@RequestBody String message) {
+    public String createMessage(@RequestBody String message) {
 
-        IncomingMessage incomingMessage = messageService.processMessage(createMessageDTO(message));
+     //   IncomingMessage incomingMessage = null;// messageService.processMessage(createMessageDTO(message));
 
         log.info("createMessage....................");
         //AdaptorApiResponse<String> response = new AdaptorApiResponse<>(201, "Message created successfully", "Message Id: " + incomingMessage.getMessageId());
-        AdaptorApiResponse<IncomingMessage> response = new AdaptorApiResponse<>(201, "Message created successfully", incomingMessage);
+       // AdaptorApiResponse<IncomingMessage> response = new AdaptorApiResponse<>(201, "Message created successfully", incomingMessage);
         log.info("createMessage Created...................");
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return "";
 
     }
 
     private MessageDTO createMessageDTO(String rawMessage) {
         return MessageDTO.builder().message(rawMessage).source("GOOGLE").messageIdentifier("TMS00001").build();
 
-    }
+    }*/
 
    /* @PostMapping
     public ResponseEntity<String> receiveMessage(@RequestBody String xmlMessage) {

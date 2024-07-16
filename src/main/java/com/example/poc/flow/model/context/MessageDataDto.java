@@ -1,10 +1,11 @@
 package com.example.poc.flow.model.context;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Data
@@ -19,6 +20,9 @@ public class MessageDataDto {
     private String currency;
     private int version;
     private String transactionId;
+    private String source;
+
+    private List<String> legs = new ArrayList<>();
 
 
 }

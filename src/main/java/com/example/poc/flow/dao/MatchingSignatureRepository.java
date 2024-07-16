@@ -1,0 +1,7 @@
+package com.example.poc.flow.dao;
+
+import com.example.poc.flow.model.entity.MatchingSignature;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MatchingSignatureRepository extends JpaRepository<MatchingSignature, Long> {
+}
