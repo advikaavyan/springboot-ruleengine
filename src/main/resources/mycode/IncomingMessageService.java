@@ -59,10 +59,10 @@ public class IncomingMessageService {
                 IncomingMessage savedMessage = incomingMessageRepository.save(incomingMessage);
 
                 // Save associated signatures
-                for (Signature signature : incomingMessage.getSignatures()) {
+                /*for (Signature signature : incomingMessage.getSignatures()) {
                     signature.setIncomingMessage(savedMessage);
                     signatureRepository.save(signature);
-                }
+                }*/
 
                 // Perform business logic to create trackers and outgoing messages
                 createAndSaveTrackersAndOutgoingMessages(savedMessage);

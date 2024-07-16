@@ -1,12 +1,15 @@
 package com.example.poc.flow.mapper;
 
+import com.example.poc.flow.model.dto.MatchingSignatureDTO;
+import com.example.poc.flow.model.entity.InboundMessage;
+import com.example.poc.flow.model.entity.MatchingSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MatchingSignatureMapper {
 
-   /* @Autowired
+    @Autowired
     private InboundMessageMapper inboundMessageMapper;
 
     public MatchingSignature toEntity(MatchingSignatureDTO dto, InboundMessage inboundMessage) {
@@ -15,7 +18,6 @@ public class MatchingSignatureMapper {
         }
 
         MatchingSignature entity = new MatchingSignature();
-        entity.setMatchingSignatureId(dto.getMatchingSignatureId());
         entity.setInboundMessage(inboundMessage);
         entity.setMatchingKey(dto.getMatchingKey());
         entity.setMatchingValue(dto.getMatchingValue());
@@ -23,6 +25,9 @@ public class MatchingSignatureMapper {
 
         return entity;
     }
+
+
+
 
     public MatchingSignatureDTO toDTO(MatchingSignature entity) {
         if (entity == null) {
@@ -37,5 +42,5 @@ public class MatchingSignatureMapper {
         dto.setIsValid(entity.getIsValid());
 
         return dto;
-    }*/
+    }
 }

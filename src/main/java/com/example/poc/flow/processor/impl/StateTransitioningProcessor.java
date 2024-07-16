@@ -3,6 +3,7 @@ package com.example.poc.flow.processor.impl;
 import com.example.poc.flow.model.base.BaseContext;
 import com.example.poc.flow.model.base.Transaction;
 import com.example.poc.flow.model.context.MessageFlowDto;
+import com.example.poc.flow.model.dto.MessageFlowTrackerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public class StateTransitioningProcessor extends AbstractProcessor {
     public BaseContext execute(final BaseContext baseContext) {
         Transaction latestTransaction = getLatestTransaction(baseContext);
         if (Objects.nonNull(latestTransaction)) {
-            for (MessageFlowDto messageFlowDto : latestTransaction.getMessageFlows()) {
+            for (MessageFlowTrackerDTO messageFlowDto : latestTransaction.getMessageFlows()) {
 
             }
         }

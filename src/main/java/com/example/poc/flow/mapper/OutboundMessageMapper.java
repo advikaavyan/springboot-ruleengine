@@ -1,12 +1,15 @@
 package com.example.poc.flow.mapper;
 
+import com.example.poc.flow.model.dto.OutboundMessageDTO;
+import com.example.poc.flow.model.entity.MessageFlowTracker;
+import com.example.poc.flow.model.entity.OutboundMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OutboundMessageMapper {
 
-   /* @Autowired
+    @Autowired
     private MessageFlowTrackerMapper messageFlowTrackerMapper;
 
     public OutboundMessage toEntity(OutboundMessageDTO dto, MessageFlowTracker messageFlowTracker) {
@@ -37,5 +40,5 @@ public class OutboundMessageMapper {
         dto.setCreatedAt(entity.getCreatedAt());
 
         return dto;
-    }*/
+    }
 }

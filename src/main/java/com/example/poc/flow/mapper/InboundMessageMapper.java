@@ -2,6 +2,7 @@ package com.example.poc.flow.mapper;
 
 import com.example.poc.flow.model.context.MessageDataDto;
 import com.example.poc.flow.model.dto.InboundMessageDTO;
+import com.example.poc.flow.model.dto.MessageDataDTO;
 import com.example.poc.flow.model.entity.InboundMessage;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public class InboundMessageMapper {
         return entity;
     }
 
-    public InboundMessage toEntity(MessageDataDto dto) {
+    public InboundMessage toEntity(MessageDataDTO dto) {
         if (dto == null) {
             return null;
         }

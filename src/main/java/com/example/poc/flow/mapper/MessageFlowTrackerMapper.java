@@ -1,12 +1,15 @@
 package com.example.poc.flow.mapper;
 
+import com.example.poc.flow.model.dto.MessageFlowTrackerDTO;
+import com.example.poc.flow.model.entity.InboundMessage;
+import com.example.poc.flow.model.entity.MessageFlowTracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageFlowTrackerMapper {
 
-   /* @Autowired
+    @Autowired
     private InboundMessageMapper inboundMessageMapper;
 
     public MessageFlowTracker toEntity(MessageFlowTrackerDTO dto, InboundMessage inboundMessage) {
@@ -45,5 +48,5 @@ public class MessageFlowTrackerMapper {
         dto.setInFlightExpiredAt(entity.getInFlightExpiredAt());
 
         return dto;
-    }*/
+    }
 }

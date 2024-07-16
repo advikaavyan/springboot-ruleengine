@@ -24,8 +24,18 @@ public class MatchingSignatureDaoService {
     public MatchingSignature save(MatchingSignature signature) {
         return repository.save(signature);
     }
-
+    public List<MatchingSignature> saveAll(List<MatchingSignature> signatures) {
+        return repository.saveAll(signatures);
+    }
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    public Optional<MatchingSignature> findByMatchingKeyAndMatchingValue(String matchingKey, String matchingValue) {
+        return repository.findByMatchingKeyAndMatchingValue(matchingKey, matchingValue);
+    }
+
+    public List<MatchingSignature> findByMatchingKeysAndMatchingValues(List<String> matchingKeys, List<String> matchingValues) {
+        return repository.findByMatchingKeyInAndMatchingValueIn(matchingKeys, matchingValues);
     }
 }

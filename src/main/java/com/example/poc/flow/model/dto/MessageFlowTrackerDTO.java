@@ -1,7 +1,9 @@
 package com.example.poc.flow.model.dto;
 
 import java.time.LocalDateTime;
+import lombok.Data;
 
+@Data
 public class MessageFlowTrackerDTO {
     private Long messageFlowTrackerId;
     private Long messageId;

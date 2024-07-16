@@ -1,13 +1,25 @@
 package com.example.poc.flow.model.dto;
 
-import java.time.LocalDate;
+import lombok.Data;
 
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 public class MessageDataDTO {
-    private Long messageDataId;
-    private Long messageId;
+    private String rawMessage;
+    private ZonedDateTime date;
     private String accountNumber;
-    private LocalDate tradeDate;
-    private String senderBic;
+    private String messageFunction;
+    private String messageType;
+    private double amount;
+    private String currency;
+    private int version;
+    private String transactionId;
+    private String source;
+    private String uuid;
+    private List<String> legs = new ArrayList<>();
 
     // Getters and Setters
 }

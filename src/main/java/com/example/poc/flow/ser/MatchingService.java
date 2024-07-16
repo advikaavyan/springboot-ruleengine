@@ -1,9 +1,10 @@
 package com.example.poc.flow.ser;
 
-import com.example.poc.flow.model.context.MessageDataDto;
-import com.example.poc.flow.model.context.SignatureDto;
+import com.example.poc.flow.model.dto.MatchingSignatureDTO;
+import com.example.poc.flow.model.entity.MatchingSignature;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,10 +15,17 @@ public class MatchingService {
         this.matchingSignatureDaoService = matchingSignatureDaoService;
     }
 
-    public List<SignatureDto> matches(MessageDataDto messageDataDto) {
-        matchingSignatureDaoService.findAll();
+    public List<MatchingSignature> matches(List<MatchingSignatureDTO> matchingSignatureDTOs) {
+        List<String> keys = new ArrayList<>();
+        List<String> values = new ArrayList<>();
 
-        return List.of(new SignatureDto());
+        for (MatchingSignatureDTO matchingSignatureDTO : matchingSignatureDTOs) {
+            keys.add(matchingSignatureDTO.getMatchingKey());
+            values.add(matchingSignatureDTO.getMatchingValue());
+        }
+
+        return matchingSignatureDaoService.findByMatchingKeysAndMatchingValues(keys, values);
+
 
     }
 }

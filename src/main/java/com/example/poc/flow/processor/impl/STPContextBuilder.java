@@ -4,7 +4,8 @@ package com.example.poc.flow.processor.impl;
 import com.example.poc.flow.model.base.*;
 import com.example.poc.flow.model.base.impl.StpContext;
 import com.example.poc.flow.model.base.impl.TransactionCollectionImpl;
-import com.example.poc.flow.model.context.*;
+import com.example.poc.flow.model.context.Navhold;
+import com.example.poc.flow.model.dto.*;
 import com.example.poc.flow.processor.ContextBuilder;
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -16,32 +17,32 @@ import java.util.List;
 public class STPContextBuilder implements ContextBuilder {
     @Override
     public BaseContext buildContext(Message message) {
-        MessageDataDto messageDataDto = (MessageDataDto) message.getContent();
-        BaseContext baseContext = createContext(messageDataDto);
+        MessageDataDTO messageDataDTO = (MessageDataDTO) message.getContent();
+        BaseContext baseContext = createContext(messageDataDTO);
         return baseContext;
     }
 
-    private BaseContext createContext(MessageDataDto messageDataDto) {
+    private BaseContext createContext(MessageDataDTO messageDataDTO) {
         BaseContext baseContext = StpContext.builder().build();
         TransactionCollection transactionCollection = new TransactionCollectionImpl();
         TransactionImpl transaction = new TransactionImpl();
-        transaction.setMessageData(messageDataDto);
+        transaction.setMessageData(messageDataDTO);
         transactionCollection.appendTransaction(transaction);
-        baseContext.addTransactions(TransactionKey.valueOf(messageDataDto.getMessageFunction()), transactionCollection);
+        baseContext.addTransactions(TransactionKey.valueOf(messageDataDTO.getMessageFunction()), transactionCollection);
         return baseContext;
     }
 
     @Data
     private class TransactionImpl implements Transaction {
-        private MessageDataDto messageData;
+        private MessageDataDTO messageData;
         private Navhold navhold = new Navhold();
-        private IncomingMessageDto incomingMessage;
-        private List<MessageFlowDto> messageFlows = new ArrayList<>();
-        private List<OutboundDto> outbounds = new ArrayList<>();
-        private List<SignatureDto> signatures = new ArrayList<>();
+        private InboundMessageDTO inboundMessageDTO;
+        private List<MessageFlowTrackerDTO> messageFlows = new ArrayList<>();
+        private List<OutboundMessageDTO> outbounds = new ArrayList<>();
+        private List<MatchingSignatureDTO> matchingSignatureDTOS = new ArrayList<>();
 
         @Override
-        public MessageDataDto getMessageData() {
+        public MessageDataDTO getMessageData() {
             return messageData;
         }
 
@@ -51,23 +52,23 @@ public class STPContextBuilder implements ContextBuilder {
         }
 
         @Override
-        public IncomingMessageDto getIncomingMessageDto() {
-            return incomingMessage;
+        public InboundMessageDTO getInboundMessageDTO() {
+            return inboundMessageDTO;
         }
 
         @Override
-        public List<MessageFlowDto> getMessageFlows() {
+        public List<MessageFlowTrackerDTO> getMessageFlows() {
             return messageFlows;
         }
 
         @Override
-        public List<OutboundDto> getOutbounds() {
+        public List<OutboundMessageDTO> getOutbounds() {
             return outbounds;
         }
 
         @Override
-        public List<SignatureDto> getSignatures() {
-            return signatures;
+        public List<MatchingSignatureDTO> getMatchingSignatures() {
+            return matchingSignatureDTOS;
         }
     }
 }

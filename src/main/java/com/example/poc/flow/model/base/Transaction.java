@@ -1,19 +1,21 @@
 package com.example.poc.flow.model.base;
 
 
-
-import com.example.poc.flow.model.context.*;
+import com.example.poc.flow.model.context.Navhold;
+import com.example.poc.flow.model.dto.*;
 
 import java.util.List;
 
 public interface Transaction {
-    MessageDataDto getMessageData();
+    MessageDataDTO getMessageData();
+
     Navhold getNavhold();
-    IncomingMessageDto getIncomingMessageDto();
 
-    List<MessageFlowDto> getMessageFlows();
+    InboundMessageDTO getInboundMessageDTO();
 
-    List<OutboundDto> getOutbounds();
+    List<MessageFlowTrackerDTO> getMessageFlows();
 
-    List<SignatureDto> getSignatures();
+    List<OutboundMessageDTO> getOutbounds();
+
+    List<MatchingSignatureDTO> getMatchingSignatures();
 }

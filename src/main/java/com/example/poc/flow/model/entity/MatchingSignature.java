@@ -1,9 +1,11 @@
 package com.example.poc.flow.model.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "MATCHING_SIGNATURE")
+@Data
 public class MatchingSignature {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

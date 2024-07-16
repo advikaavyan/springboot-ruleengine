@@ -28,4 +28,8 @@ public class MessageFlowTrackerDaoService {
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
+
+    public List<MessageFlowTracker> saveAll(List<MessageFlowTracker> messageFlowTrackers) {
+        return repository.saveAll(messageFlowTrackers);
+    }
 }

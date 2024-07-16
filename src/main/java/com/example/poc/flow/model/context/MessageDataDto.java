@@ -21,7 +21,7 @@ public class MessageDataDto {
     private int version;
     private String transactionId;
     private String source;
-
+    private String uuid;
     private List<String> legs = new ArrayList<>();
 
 

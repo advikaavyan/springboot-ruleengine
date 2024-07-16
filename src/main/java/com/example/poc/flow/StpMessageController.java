@@ -4,6 +4,7 @@ import com.example.poc.flow.impl.STPFlow;
 import com.example.poc.flow.model.base.Message;
 import com.example.poc.flow.model.base.impl.MessageImpl;
 import com.example.poc.flow.model.context.MessageDataDto;
+import com.example.poc.flow.model.dto.MessageDataDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class StpMessageController {
 
 
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity createMessage(@RequestBody MessageDataDto message) {
+    public ResponseEntity createMessage(@RequestBody MessageDataDTO message) {
         log.info("Received Message is {}....................",message);
         Message message1 = MessageImpl.builder().content(message).receivedAt(LocalDateTime.now()).build();
         stpFlow.executeMessageFlow(message1);
