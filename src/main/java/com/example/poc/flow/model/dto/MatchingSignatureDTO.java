@@ -1,6 +1,6 @@
 package com.example.poc.flow.model.dto;
 
-import com.example.poc.flow.model.MatchingKey;
+import com.example.poc.flow.model.base.MatchingKey;
 import lombok.Data;
 
 @Data

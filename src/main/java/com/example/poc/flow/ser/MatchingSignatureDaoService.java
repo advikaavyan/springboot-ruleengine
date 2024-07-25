@@ -1,7 +1,7 @@
 package com.example.poc.flow.ser;
 
 import com.example.poc.flow.dao.MatchingSignatureRepository;
-import com.example.poc.flow.model.MatchingKey;
+import com.example.poc.flow.model.base.MatchingKey;
 import com.example.poc.flow.model.entity.MatchingSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

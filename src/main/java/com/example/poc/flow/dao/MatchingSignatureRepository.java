@@ -1,6 +1,6 @@
 package com.example.poc.flow.dao;
 
-import com.example.poc.flow.model.MatchingKey;
+import com.example.poc.flow.model.base.MatchingKey;
 import com.example.poc.flow.model.entity.MatchingSignature;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

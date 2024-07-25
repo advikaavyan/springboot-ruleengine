@@ -1,6 +1,6 @@
 package com.example.poc.flow.model.entity;
 
-import com.example.poc.flow.model.MatchingKey;
+import com.example.poc.flow.model.base.MatchingKey;
 import jakarta.persistence.*;
 import lombok.Data;
 

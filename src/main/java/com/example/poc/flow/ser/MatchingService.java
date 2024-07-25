@@ -1,6 +1,6 @@
 package com.example.poc.flow.ser;
 
-import com.example.poc.flow.model.MatchingKey;
+import com.example.poc.flow.model.base.MatchingKey;
 import com.example.poc.flow.model.base.Transaction;
 import com.example.poc.flow.model.dto.MatchingSignatureDTO;
 import com.example.poc.flow.model.dto.MessageDataDTO;
