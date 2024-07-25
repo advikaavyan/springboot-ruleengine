@@ -8,7 +8,7 @@
   "version": 3,
   "legs": ["ASSET","GST","EXPENSE"],
   "source": "SWF",
-  "rawMessage": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB_SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+  "rawMessage": "AAA",
   "uuid": "123456789abcd",
   "transactionId": "TXN123456789"
 }

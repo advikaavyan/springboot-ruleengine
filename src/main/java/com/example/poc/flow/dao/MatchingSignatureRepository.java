@@ -1,5 +1,6 @@
 package com.example.poc.flow.dao;
 
+import com.example.poc.flow.model.MatchingKey;
 import com.example.poc.flow.model.entity.MatchingSignature;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,5 +13,5 @@ public interface MatchingSignatureRepository extends JpaRepository<MatchingSigna
     Optional<MatchingSignature> findByMatchingKeyAndMatchingValue(String matchingKey, String matchingValue);
 
     @Query("SELECT ms FROM MatchingSignature ms WHERE ms.matchingKey IN :matchingKeys AND ms.matchingValue IN :matchingValues")
-    List<MatchingSignature> findByMatchingKeyInAndMatchingValueIn(@Param("matchingKeys") List<String> matchingKeys, @Param("matchingValues") List<String> matchingValues);
+    List<MatchingSignature> findByMatchingKeyInAndMatchingValueIn(@Param("matchingKeys") List<MatchingKey> matchingKeys, @Param("matchingValues") List<String> matchingValues);
 }

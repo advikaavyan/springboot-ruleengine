@@ -1,6 +1,7 @@
 package com.example.poc.flow.ser;
 
 import com.example.poc.flow.dao.MatchingSignatureRepository;
+import com.example.poc.flow.model.MatchingKey;
 import com.example.poc.flow.model.entity.MatchingSignature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,7 @@ public class MatchingSignatureDaoService {
         return repository.findByMatchingKeyAndMatchingValue(matchingKey, matchingValue);
     }
 
-    public List<MatchingSignature> findByMatchingKeysAndMatchingValues(List<String> matchingKeys, List<String> matchingValues) {
+    public List<MatchingSignature> findByMatchingKeysAndMatchingValues(List<MatchingKey> matchingKeys, List<String> matchingValues) {
         return repository.findByMatchingKeyInAndMatchingValueIn(matchingKeys, matchingValues);
     }
 }

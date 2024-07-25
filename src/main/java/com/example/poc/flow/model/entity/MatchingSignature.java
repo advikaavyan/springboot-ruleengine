@@ -1,5 +1,6 @@
 package com.example.poc.flow.model.entity;
 
+import com.example.poc.flow.model.MatchingKey;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,7 +19,8 @@ public class MatchingSignature {
     private InboundMessage inboundMessage;
 
     @Column(name = "MATCHING_KEY")
-    private String matchingKey;
+    @Enumerated(EnumType.STRING)
+    private MatchingKey matchingKey;
 
     @Lob
     @Column(name = "MATCHING_VALUE")

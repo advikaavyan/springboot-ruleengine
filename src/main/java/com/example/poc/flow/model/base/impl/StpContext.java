@@ -1,12 +1,13 @@
 package com.example.poc.flow.model.base.impl;
 
 import com.example.poc.flow.model.base.BaseContext;
-import com.example.poc.flow.model.base.TransactionKey;
 import com.example.poc.flow.model.base.TransactionCollection;
+import com.example.poc.flow.model.base.TransactionKey;
 import lombok.Builder;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Builder
 public class StpContext implements BaseContext {
@@ -31,11 +32,16 @@ public class StpContext implements BaseContext {
     }
 
     @Override
+    public Set<TransactionKey> getTransactionKeys() {
+        return transactionCollectionMap.keySet();
+    }
+
+    @Override
     public Map<TransactionKey, TransactionCollection> addTransactions(TransactionKey transactionKey, TransactionCollection transactionCollection) {
-        if (transactionCollectionMap.size() == 0) {
+    /*    if (transactionCollectionMap.size() == 0) {*/
             runningTransactionKey = transactionKey;
             transactionCollectionMap.put(transactionKey, transactionCollection);
-        }
+        /*  }*/
 
         return transactionCollectionMap;
     }

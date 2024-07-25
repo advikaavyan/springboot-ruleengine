@@ -1,12 +1,13 @@
 package com.example.poc.flow.model.dto;
 
+import com.example.poc.flow.model.MatchingKey;
 import lombok.Data;
 
 @Data
 public class MatchingSignatureDTO {
     private Long matchingSignatureId;
     private Long messageId;
-    private String matchingKey;
+    private MatchingKey matchingKey;
     private String matchingValue;
     private Boolean isValid;
 
