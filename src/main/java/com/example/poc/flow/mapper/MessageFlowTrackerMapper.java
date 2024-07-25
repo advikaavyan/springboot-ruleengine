@@ -6,6 +6,9 @@ import com.example.poc.flow.model.entity.MessageFlowTracker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class MessageFlowTrackerMapper {
 
@@ -48,5 +51,14 @@ public class MessageFlowTrackerMapper {
         dto.setInFlightExpiredAt(entity.getInFlightExpiredAt());
 
         return dto;
+    }
+
+    public List<MessageFlowTrackerDTO> toDTO(List<MessageFlowTracker> entities) {
+        List<MessageFlowTrackerDTO> dtos = new ArrayList<>();
+        for (MessageFlowTracker messageFlowTracker : entities) {
+            dtos.add(toDTO(messageFlowTracker));
+        }
+
+        return dtos;
     }
 }

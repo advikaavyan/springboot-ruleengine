@@ -2,6 +2,7 @@ package com.example.poc.flow.model.dto;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,11 @@ public class MessageDataDTO {
     private String source;
     private String uuid;
     private List<String> legs = new ArrayList<>();
+
+    private Long messageId;
+    private String senderBic;
+    private LocalDate tradeDate;
+
 
     // Getters and Setters
 }

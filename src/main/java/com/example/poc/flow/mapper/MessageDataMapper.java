@@ -30,12 +30,12 @@ public class MessageDataMapper {
         }
 
         MessageDataDTO dto = new MessageDataDTO();
-    /*    dto.setMessageDataId(entity.getMessageDataId());
+        dto.setMessageId(entity.getMessageDataId());
         dto.setMessageId(entity.getInboundMessage().getMessageId());
         dto.setAccountNumber(entity.getAccountNumber());
         dto.setTradeDate(entity.getTradeDate());
         dto.setSenderBic(entity.getSenderBic());
-*/
+
         return dto;
     }
 }

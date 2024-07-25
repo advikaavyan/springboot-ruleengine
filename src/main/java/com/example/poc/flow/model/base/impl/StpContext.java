@@ -20,7 +20,6 @@ public class StpContext implements BaseContext {
     }
 
 
-
     @Override
     public TransactionCollection getTransactions(TransactionKey transactionKey) {
         if (transactionCollectionMap.size() == 0) {
@@ -38,11 +37,10 @@ public class StpContext implements BaseContext {
 
     @Override
     public Map<TransactionKey, TransactionCollection> addTransactions(TransactionKey transactionKey, TransactionCollection transactionCollection) {
-    /*    if (transactionCollectionMap.size() == 0) {*/
+        if (transactionCollectionMap.size() == 0) {
             runningTransactionKey = transactionKey;
-            transactionCollectionMap.put(transactionKey, transactionCollection);
-        /*  }*/
-
+        }
+        transactionCollectionMap.put(transactionKey, transactionCollection);
         return transactionCollectionMap;
     }
 

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "INBOUND_MESSAGE")
@@ -24,6 +25,12 @@ public class InboundMessage {
 
     @Column(name = "RECEIVED_AT")
     private LocalDateTime receivedAt;
+    @OneToMany
+    @JoinColumn(name = "MESSAGE_ID")
+    private List<MessageFlowTracker> messageFlowTrackers;
 
+    @OneToOne
+    @JoinColumn(name = "MESSAGE_ID")
+    private MessageData messageData;
 
 }
