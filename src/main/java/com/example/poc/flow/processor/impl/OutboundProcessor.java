@@ -5,10 +5,10 @@ import com.example.poc.flow.model.base.BaseContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OutboundProcessor implements AdaptorProcessor {
+public class OutboundProcessor extends AbstractProcessor {
     @Override
     public BaseContext execute(final BaseContext baseContext) {
-
+        super.execute(baseContext);
         return baseContext;
     }
 }

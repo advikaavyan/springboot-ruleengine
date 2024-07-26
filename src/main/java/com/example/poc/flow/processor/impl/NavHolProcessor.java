@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 public class NavHolProcessor extends AbstractProcessor {
     @Override
     public BaseContext execute(final BaseContext baseContext) {
+        super.execute(baseContext);
         Transaction transaction = getLatestTransaction(baseContext);
         String accountNumber = transaction.getMessageData().getAccountNumber();
         // api call

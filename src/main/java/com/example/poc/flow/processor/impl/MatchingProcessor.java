@@ -2,11 +2,7 @@ package com.example.poc.flow.processor.impl;
 
 
 import com.example.poc.flow.helper.EntityToDTOs;
-import com.example.poc.flow.model.base.MatchingKey;
-import com.example.poc.flow.model.base.BaseContext;
-import com.example.poc.flow.model.base.Transaction;
-import com.example.poc.flow.model.base.TransactionCollection;
-import com.example.poc.flow.model.base.TransactionKey;
+import com.example.poc.flow.model.base.*;
 import com.example.poc.flow.model.base.impl.TransactionCollectionImpl;
 import com.example.poc.flow.model.dto.MatchingSignatureDTO;
 import com.example.poc.flow.model.entity.MatchingSignature;
@@ -34,6 +30,7 @@ public class MatchingProcessor extends AbstractProcessor {
 
     @Override
     public BaseContext execute(final BaseContext baseContext) {
+        super.execute(baseContext);
         Transaction transaction = getLatestTransaction(baseContext);
         List<MatchingSignatureDTO> matchingSignatureDTOS = matchingService.createMatchingKeys(transaction);
 

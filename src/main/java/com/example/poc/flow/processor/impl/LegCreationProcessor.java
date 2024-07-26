@@ -14,6 +14,7 @@ import java.util.Objects;
 public class LegCreationProcessor extends AbstractProcessor {
     @Override
     public BaseContext execute(final BaseContext baseContext) {
+        super.execute(baseContext);
         Transaction transaction = getLatestTransaction(baseContext);
         if (Objects.nonNull(transaction)) {
             log.info("Going to create legs for {}", transaction.getMessageData().getLegs());

@@ -8,15 +8,18 @@ import com.example.poc.flow.model.context.Navhold;
 import com.example.poc.flow.model.dto.*;
 import com.example.poc.flow.processor.ContextBuilder;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class STPContextBuilder implements ContextBuilder {
     @Override
     public BaseContext buildContext(Message message) {
+        log.info("Inside STPContextBuilder");
         MessageDataDTO messageDataDTO = (MessageDataDTO) message.getContent();
         BaseContext baseContext = createContext(messageDataDTO);
         return baseContext;
