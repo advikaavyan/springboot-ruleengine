@@ -1,7 +1,5 @@
 package com.example.poc.flow.ser;
 
-import com.example.poc.flow.dao.MessageDataRepository;
-import com.example.poc.flow.model.entity.MessageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +8,7 @@ import java.util.Optional;
 
 @Service
 public class MessageDataDaoService {
-    @Autowired
+  /*  @Autowired
     private MessageDataRepository repository;
 
     public List<MessageData> findAll() {
@@ -27,5 +25,5 @@ public class MessageDataDaoService {
 
     public void deleteById(Long id) {
         repository.deleteById(id);
-    }
+    }*/
 }

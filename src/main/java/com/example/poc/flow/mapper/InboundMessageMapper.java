@@ -1,6 +1,5 @@
 package com.example.poc.flow.mapper;
 
-import com.example.poc.flow.model.context.MessageDataDto;
 import com.example.poc.flow.model.dto.InboundMessageDTO;
 import com.example.poc.flow.model.dto.MessageDataDTO;
 import com.example.poc.flow.model.entity.InboundMessage;
@@ -18,6 +17,8 @@ public class InboundMessageMapper {
 
         InboundMessage entity = new InboundMessage();
         entity.setMessageId(dto.getMessageId());
+        entity.setMessageIdentifier(dto.getMessageIdentifier());
+        entity.setMessageFunction(dto.getMessageFunction());
         entity.setSource(dto.getSource());
         entity.setInMessage(dto.getInMessage());
         entity.setReceivedAt(dto.getReceivedAt());
@@ -31,7 +32,8 @@ public class InboundMessageMapper {
         }
 
         InboundMessage entity = new InboundMessage();
-
+        entity.setMessageIdentifier(dto.getMessageIdentifier());
+        entity.setMessageFunction(dto.getMessageFunction());
         entity.setSource(dto.getSource());
         entity.setInMessage(dto.getRawMessage());
         entity.setReceivedAt(LocalDateTime.now());
@@ -46,6 +48,8 @@ public class InboundMessageMapper {
 
         InboundMessageDTO dto = new InboundMessageDTO();
         dto.setMessageId(entity.getMessageId());
+        dto.setMessageIdentifier(entity.getMessageIdentifier());
+        dto.setMessageFunction(entity.getMessageFunction());
         dto.setSource(entity.getSource());
         dto.setInMessage(entity.getInMessage());
         dto.setReceivedAt(entity.getReceivedAt());

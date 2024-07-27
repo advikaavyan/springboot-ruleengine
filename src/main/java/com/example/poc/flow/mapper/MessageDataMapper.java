@@ -1,15 +1,11 @@
 package com.example.poc.flow.mapper;
 
-import com.example.poc.flow.model.dto.MessageDataDTO;
-import com.example.poc.flow.model.entity.InboundMessage;
-import com.example.poc.flow.model.entity.MessageData;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageDataMapper {
 
-    @Autowired
+    /*@Autowired
     private InboundMessageMapper inboundMessageMapper;
 
     public MessageData toEntity(MessageDataDTO dto, InboundMessage inboundMessage) {
@@ -37,5 +33,5 @@ public class MessageDataMapper {
         dto.setSenderBic(entity.getSenderBic());
 
         return dto;
-    }
+    }*/
 }

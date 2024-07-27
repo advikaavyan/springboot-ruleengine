@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -22,7 +23,6 @@
     <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.21.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jul-to-slf4j:2.0.12" level="project" />
     <orderEntry type="library" name="Maven: jakarta.annotation:jakarta.annotation-api:2.1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:2.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator-autoconfigure:3.2.4" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-actuator:3.2.4" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.15.4" level="project" />
@@ -105,7 +105,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.jupiter:junit-jupiter-engine:5.10.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.junit.platform:junit-platform-engine:1.10.2" level="project" />
     <orderEntry type="library" name="Maven: com.mysql:mysql-connector-j:8.0.31" level="project" />
-    <orderEntry type="library" name="Maven: com.h2database:h2:2.2.224" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.h2database:h2:2.2.224" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:3.2.4" level="project" />
     <orderEntry type="library" name="Maven: com.zaxxer:HikariCP:5.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:6.1.5" level="project" />
@@ -113,7 +113,6 @@
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-starter-webmvc-api:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: org.springdoc:springdoc-openapi-starter-common:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-core-jakarta:2.2.8" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.13.0" level="project" />
     <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-annotations-jakarta:2.2.8" level="project" />
     <orderEntry type="library" name="Maven: io.swagger.core.v3:swagger-models-jakarta:2.2.8" level="project" />
     <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
@@ -121,5 +120,14 @@
     <orderEntry type="library" name="Maven: org.webjars:swagger-ui:4.18.1" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:webjars-locator-core:0.55" level="project" />
     <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.149" level="project" />
+    <orderEntry type="module" module-name="adaptor-databse" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.oracle.database.jdbc:ojdbc8:21.9.0.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.liquibase:liquibase-core:4.24.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.opencsv:opencsv:5.8" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.13.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-text:1.10.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.commons:commons-collections4:4.4" level="project" />
+    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:2.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: javax.xml.bind:jaxb-api:2.3.1" level="project" />
   </component>
 </module>

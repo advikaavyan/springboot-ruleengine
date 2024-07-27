@@ -29,10 +29,11 @@ public class MatchingProcessor extends AbstractProcessor {
     }
 
     @Override
-    public BaseContext execute(final BaseContext baseContext) {
+    public BaseContext execute(BaseContext baseContext) {
         super.execute(baseContext);
         Transaction transaction = getLatestTransaction(baseContext);
         List<MatchingSignatureDTO> matchingSignatureDTOS = matchingService.createMatchingKeys(transaction);
+        transaction.getMatchingSignatures().addAll(matchingSignatureDTOS);
 
         if (Objects.nonNull(getLatestTransaction(baseContext))) {
             List<MatchingSignature> matchingSignatures = matchingService.getMatchingSignatures(matchingSignatureDTOS);
@@ -40,20 +41,15 @@ public class MatchingProcessor extends AbstractProcessor {
                 log.info("NO MatchingSignatures found for its own message type, now going to check linked message functions key to load its data to update into current context ....");
                 List<MatchingSignatureDTO> linkedMatchingSignatureDTOS = matchingService.createLinkedMatchingKeys(transaction);
                 List<MatchingSignature> linkedMatchingSignatures = matchingService.getMatchingSignatures(linkedMatchingSignatureDTOS);
-                transaction.getMatchingSignatures().addAll(matchingSignatureDTOS);
                 if (linkedMatchingSignatures.isEmpty()) {
                     log.info("NO Linked Message Function MatchingSignatures found add the message signatures into context and return the context .");
-
-                    log.info("Added matchingSignatureDTOS.......matchingSignatureDTOS matchingSignatureDTOS....");
                     return baseContext;
                 } else {
                     log.info("Linked Message Function MatchingSignatures found load linked message function data into current context along with received message functions signature .");
-                    mergeCurrentContextWithLinkedTransactionData(baseContext, linkedMatchingSignatures);
+                    return mergeCurrentContextWithLinkedTransactionData(baseContext, linkedMatchingSignatures);
                 }
-
-
             } else {
-                log.error("THROW EXCEPTIONS...........................................");
+                log.error("Duplicate Trades found, now going to throw exceptions..........................................");
                 throwException(matchingService.ListToMap(matchingSignatures));
             }
         }
@@ -64,16 +60,19 @@ public class MatchingProcessor extends AbstractProcessor {
     private void throwException(Map<MatchingKey, MatchingSignature> matchingSignatureMap) {
         MatchingSignature matchingSignature = matchingSignatureMap.get(MatchingKey.BME_HEADER_DUPE);
         if (Objects.nonNull(matchingSignature)) {
-            throw new RuntimeException("Duplicate Message: Already Trade with uuid = " + matchingSignature.getMatchingValue() + " found with message Id " + matchingSignature.getInboundMessage().getMessageId());
+            throw new RuntimeException("Duplicate Message: BME_HEADER_DUPE Already Trade with uuid = " + matchingSignature.getMatchingValue() + " found with message Id " + matchingSignature.getInboundMessage().getMessageId());
         }
         matchingSignature = matchingSignatureMap.get(MatchingKey.NEWM_BASKET_VERSION_DUPE);
         if (Objects.nonNull(matchingSignature)) {
-            throw new RuntimeException(("Duplicate Message: Already Trade with same uuid, basket and version =" + matchingSignature.getMatchingValue() + " found with message Id  " + matchingSignature.getInboundMessage().getMessageId()));
-
+            throw new RuntimeException(("Duplicate Message: BASKET_VERSION_DUPE- NEWM Already Trade with same uuid, basket and version =" + matchingSignature.getMatchingValue() + " found with message Id  " + matchingSignature.getInboundMessage().getMessageId()));
+        }
+        matchingSignature = matchingSignatureMap.get(MatchingKey.CANC_BASKET_VERSION_DUPE);
+        if (Objects.nonNull(matchingSignature)) {
+            throw new RuntimeException(("Duplicate Message:  BASKET_VERSION_DUPE- CANC Already Trade with same uuid, basket and version =" + matchingSignature.getMatchingValue() + " found with message Id  " + matchingSignature.getInboundMessage().getMessageId()));
         }
     }
 
-    private void mergeCurrentContextWithLinkedTransactionData(final BaseContext baseContext, List<MatchingSignature> linkedMatchingSignatures) {
+    private BaseContext mergeCurrentContextWithLinkedTransactionData(BaseContext baseContext, List<MatchingSignature> linkedMatchingSignatures) {
         log.info("Before " + "-------------------" + baseContext.getTransactionKeys());
 
         for (MatchingSignature matchingSignature : linkedMatchingSignatures) {
@@ -85,6 +84,8 @@ public class MatchingProcessor extends AbstractProcessor {
         }
 
         log.info("After " + "-------------------" + baseContext.getTransactionKeys());
+
+        return baseContext;
     }
 
 

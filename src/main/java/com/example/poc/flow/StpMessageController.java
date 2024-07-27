@@ -3,8 +3,6 @@ package com.example.poc.flow;
 import com.example.poc.flow.impl.STPFlow;
 import com.example.poc.flow.model.base.Message;
 import com.example.poc.flow.model.base.impl.MessageImpl;
-import com.example.poc.flow.model.context.MessageDataDto;
-import com.example.poc.flow.model.dto.MessageDataDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +25,13 @@ public class StpMessageController {
         this.stpFlow = stpFlow;
     }
 
-
     @PostMapping(consumes = "application/json", produces = "application/json")
-    public ResponseEntity createMessage(@RequestBody MessageDataDTO message) {
-        log.info("Received Message is {}....................",message);
-        Message message1 = MessageImpl.builder().content(message).receivedAt(LocalDateTime.now()).build();
-        stpFlow.executeMessageFlow(message1);
-        log.info("createMessage....................");
+    public ResponseEntity createMessage(@RequestBody String inMessage) {
+        log.info("Trade Received {}....................");
+        Long startTime = System.currentTimeMillis();
+        Message message = MessageImpl.builder().content(inMessage).receivedAt(LocalDateTime.now()).build();
+        stpFlow.executeMessageFlow(message);
+        log.info("Trade processed successfully ....................in {}", System.currentTimeMillis() - startTime);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

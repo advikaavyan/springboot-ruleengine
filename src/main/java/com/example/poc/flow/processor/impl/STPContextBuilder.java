@@ -3,16 +3,20 @@ package com.example.poc.flow.processor.impl;
 
 import com.example.poc.flow.model.base.*;
 import com.example.poc.flow.model.base.impl.StpContext;
+import com.example.poc.flow.model.base.impl.StpTransactionImpl;
 import com.example.poc.flow.model.base.impl.TransactionCollectionImpl;
 import com.example.poc.flow.model.context.Navhold;
-import com.example.poc.flow.model.dto.*;
+import com.example.poc.flow.model.dto.InboundMessageDTO;
+import com.example.poc.flow.model.dto.MessageDataDTO;
 import com.example.poc.flow.processor.ContextBuilder;
-import lombok.Data;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @Slf4j
@@ -20,7 +24,7 @@ public class STPContextBuilder implements ContextBuilder {
     @Override
     public BaseContext buildContext(Message message) {
         log.info("Inside STPContextBuilder");
-        MessageDataDTO messageDataDTO = (MessageDataDTO) message.getContent();
+        MessageDataDTO messageDataDTO = toMessageDataDTO(message);
         BaseContext baseContext = createContext(messageDataDTO);
         return baseContext;
     }
@@ -28,50 +32,35 @@ public class STPContextBuilder implements ContextBuilder {
     private BaseContext createContext(MessageDataDTO messageDataDTO) {
         BaseContext baseContext = StpContext.builder().build();
         TransactionCollection transactionCollection = new TransactionCollectionImpl();
-        TransactionImpl transaction = new TransactionImpl();
-        transaction.setMessageData(messageDataDTO);
+        
+        Transaction transaction = StpTransactionImpl.builder()
+                .messageData(messageDataDTO)
+                .inboundMessageDTO(new InboundMessageDTO())
+                .messageFlows(new ArrayList<>())
+                .matchingSignatureDTOS(new ArrayList<>())
+                .navhold(new Navhold())
+                .outbounds(new ArrayList<>())
+                .build();
+
         transactionCollection.appendTransaction(transaction);
         baseContext.addTransactions(TransactionKey.valueOf(messageDataDTO.getMessageFunction()), transactionCollection);
         return baseContext;
     }
 
-    @Data
-    private class TransactionImpl implements Transaction {
-        private MessageDataDTO messageData;
-        private Navhold navhold = new Navhold();
-        private InboundMessageDTO inboundMessageDTO;
-        private List<MessageFlowTrackerDTO> messageFlows = new ArrayList<>();
-        private List<OutboundMessageDTO> outbounds = new ArrayList<>();
-        private List<MatchingSignatureDTO> matchingSignatureDTOS = new ArrayList<>();
+    private MessageDataDTO toMessageDataDTO(Message<String> message) {
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        @Override
-        public MessageDataDTO getMessageData() {
-            return messageData;
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        MessageDataDTO message1 = null;
+        try {
+            message1 = objectMapper.readValue(message.getContent(), MessageDataDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
+        message1.setRawMessage(message.getContent());
+        return message1;
 
-        @Override
-        public Navhold getNavhold() {
-            return navhold;
-        }
-
-        @Override
-        public InboundMessageDTO getInboundMessageDTO() {
-            return inboundMessageDTO;
-        }
-
-        @Override
-        public List<MessageFlowTrackerDTO> getMessageFlows() {
-            return messageFlows;
-        }
-
-        @Override
-        public List<OutboundMessageDTO> getOutbounds() {
-            return outbounds;
-        }
-
-        @Override
-        public List<MatchingSignatureDTO> getMatchingSignatures() {
-            return matchingSignatureDTOS;
-        }
     }
+
 }

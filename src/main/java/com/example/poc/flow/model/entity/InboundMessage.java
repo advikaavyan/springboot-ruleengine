@@ -16,6 +16,12 @@ public class InboundMessage {
     @Column(name = "MESSAGE_ID")
     private Long messageId;
 
+    @Column(name = "MESSAGE_IDENTIFIER")
+    private String messageIdentifier;
+
+    @Column(name = "MESSAGE_FUNCTION")
+    private String messageFunction;
+
     @Column(name = "SOURCE")
     private String source;
 
@@ -29,8 +35,8 @@ public class InboundMessage {
     @JoinColumn(name = "MESSAGE_ID")
     private List<MessageFlowTracker> messageFlowTrackers;
 
-    @OneToOne
+   /* @OneToOne
     @JoinColumn(name = "MESSAGE_ID")
-    private MessageData messageData;
+    private MessageData messageData;*/
 
 }

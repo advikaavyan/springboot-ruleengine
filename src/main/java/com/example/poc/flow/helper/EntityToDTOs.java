@@ -32,11 +32,11 @@ public class EntityToDTOs {
 
         InboundMessageDTO inboundMessageDTO = inboundMessageMapper.toDTO(matchingSignature.getInboundMessage());
         List<MessageFlowTrackerDTO> messageFlowTrackerDTOS = messageFlowTrackerMapper.toDTO(matchingSignature.getInboundMessage().getMessageFlowTrackers());
-        MessageDataDTO messageDataDTO = messageDataMapper.toDTO(matchingSignature.getInboundMessage().getMessageData());
+       // MessageDataDTO messageDataDTO = messageDataMapper.toDTO(matchingSignature.getInboundMessage().getMessageData());
         Transaction transaction = StpTransactionImpl.builder()
                 .inboundMessageDTO(inboundMessageDTO)
                 .messageFlows(messageFlowTrackerDTOS)
-                .messageData(messageDataDTO)
+               // .messageData(messageDataDTO)
                 .navhold(new Navhold())
                 .matchingSignatureDTOS(List.of())
                 .build();

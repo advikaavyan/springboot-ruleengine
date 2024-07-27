@@ -5,11 +5,11 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
-@Entity
+/*@Entity
 @Table(name = "MESSAGE_DATA")
-@Data
+@Data*/
 public class MessageData {
-    @Id
+  /*  @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MESSAGE_DATA_ID")
     private Long messageDataId;
@@ -22,7 +22,7 @@ public class MessageData {
     @Column(name = "TRADE_DATE")
     private LocalDate tradeDate;
     @Column(name = "SENDER_BIC")
-    private String senderBic;
+    private String senderBic;*/
 
 
 }

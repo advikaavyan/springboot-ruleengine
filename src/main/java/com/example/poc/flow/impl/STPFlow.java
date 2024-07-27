@@ -40,7 +40,7 @@ public class STPFlow implements Flow {
     public void executeMessageFlow(Message message) {
 
         BaseContext baseContext = contextBuilder.buildContext(message);
-        log.info("baseContext={}", baseContext);
+        // log.info("baseContext={}", baseContext);
 
         baseContext = matchingProcessor.execute(baseContext);
         baseContext = stateTransitioningProcessor.execute(baseContext);

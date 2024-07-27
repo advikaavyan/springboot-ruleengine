@@ -6,8 +6,9 @@ import com.example.poc.flow.model.base.Transaction;
 import com.example.poc.flow.model.base.TransactionKey;
 import com.example.poc.flow.model.dto.MatchingSignatureDTO;
 import com.example.poc.flow.model.dto.MessageFlowTrackerDTO;
-import com.example.poc.flow.model.dto.OutboundMessageDTO;
-import com.example.poc.flow.model.entity.*;
+import com.example.poc.flow.model.entity.InboundMessage;
+import com.example.poc.flow.model.entity.MatchingSignature;
+import com.example.poc.flow.model.entity.MessageFlowTracker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,7 @@ public class PersistService {
 
         InboundMessage inboundMessage = inboundMessageMapper.toEntity(transaction.getMessageData());
 
-        MessageData messageData = messageDataMapper.toEntity(transaction.getMessageData(), inboundMessage);
+        // MessageData messageData = messageDataMapper.toEntity(transaction.getMessageData(), inboundMessage);
 
         List<MatchingSignature> matchingSignatures = new ArrayList<>();
         for (MatchingSignatureDTO matchingSignatureDTO : transaction.getMatchingSignatures()) {
@@ -74,18 +75,17 @@ public class PersistService {
         }
 */
         inboundMessageDaoService.save(inboundMessage);
-        messageDataDaoService.save(messageData);
+        //  messageDataDaoService.save(messageData);
         matchingSignatureDaoService.saveAll(matchingSignatures);
 
-        List<MessageFlowTracker>  messageFlowTrackers1 =  messageFlowTrackerDaoService.saveAll(messageFlowTrackers);
-
+        List<MessageFlowTracker> messageFlowTrackers1 = messageFlowTrackerDaoService.saveAll(messageFlowTrackers);
 
 
         if (!transaction.getOutbounds().isEmpty()) {
             outboundMessageDaoService.saveOutboundMessages(messageFlowTrackers1, transaction.getOutbounds());
         }
 
-        log.info("Records saved...........");
+        // log.info("Records saved...........");
     }
 
     public Transaction getLatestTransaction(BaseContext baseContext) {

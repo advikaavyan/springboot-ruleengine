@@ -50,14 +50,14 @@ public class MatchingService {
         if ("NEWM".equals(transaction.getMessageData().getMessageFunction())) {
 
             matchingSignatureDTO1.setMatchingKey(MatchingKey.CANC_BASKET);
-            matchingSignatureDTO1.setMatchingValue(messageDataDto.getTransactionId() + "");
+            matchingSignatureDTO1.setMatchingValue(messageDataDto.getMessageIdentifier() + "");
 
 
         }
         if ("CANC".equals(transaction.getMessageData().getMessageFunction())) {
 
             matchingSignatureDTO1.setMatchingKey(MatchingKey.NEWM_BASKET);
-            matchingSignatureDTO1.setMatchingValue(messageDataDto.getTransactionId() + "");
+            matchingSignatureDTO1.setMatchingValue(messageDataDto.getMessageIdentifier() + "");
 
         }
         matchingSignatureDTOs.add(matchingSignatureDTO1);
@@ -81,19 +81,19 @@ public class MatchingService {
         if ("NEWM".equals(transaction.getMessageData().getMessageFunction())) {
 
             matchingSignatureDTO1.setMatchingKey(MatchingKey.NEWM_BASKET);
-            matchingSignatureDTO1.setMatchingValue(messageDataDto.getTransactionId() + "");
+            matchingSignatureDTO1.setMatchingValue(messageDataDto.getMessageIdentifier() + "");
 
             matchingSignatureDTO2.setMatchingKey(MatchingKey.NEWM_BASKET_VERSION_DUPE);
-            String value = messageDataDto.getMessageFunction() + "|" + messageDataDto.getTransactionId() + "|" + messageDataDto.getVersion();
+            String value = messageDataDto.getMessageFunction() + "|" + messageDataDto.getMessageIdentifier() + "|" + messageDataDto.getVersion();
             matchingSignatureDTO2.setMatchingValue(value);
         }
         if ("CANC".equals(transaction.getMessageData().getMessageFunction())) {
 
             matchingSignatureDTO1.setMatchingKey(MatchingKey.CANC_BASKET);
-            matchingSignatureDTO1.setMatchingValue(messageDataDto.getTransactionId() + "");
+            matchingSignatureDTO1.setMatchingValue(messageDataDto.getMessageIdentifier() + "");
 
             matchingSignatureDTO2.setMatchingKey(MatchingKey.CANC_BASKET_VERSION_DUPE);
-            String value = messageDataDto.getMessageFunction() + "|" + messageDataDto.getTransactionId() + "|" + messageDataDto.getVersion();
+            String value = messageDataDto.getMessageFunction() + "|" + messageDataDto.getMessageIdentifier() + "|" + messageDataDto.getVersion();
             matchingSignatureDTO2.setMatchingValue(value);
         }
         matchingSignatureDTOs.add(matchingSignatureDTO1);

@@ -5,14 +5,14 @@
   "messageType": "PAYMENT",
   "amount": 1500.00,
   "currency": "USD",
-  "version": 3,
+  "version": 7,
   "legs": [
     "ASSET",
     "GST",
     "EXPENSE"
   ],
   "source": "SWF",
-  "uuid": "ABCD1234_",
+  "uuid": "ABCD1234_1_A",
 
   "messageIdentifier": "TMS00001"
 }
