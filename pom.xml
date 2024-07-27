@@ -75,6 +75,7 @@
         <groupId>com.advikavyan.examples</groupId><!-- Change to your group ID -->
         <artifactId>adaptor-database</artifactId>
         <version>1.1.1</version>
+        <scope>test</scope>
     </dependency>
     <dependency>
         <groupId>org.liquibase</groupId>

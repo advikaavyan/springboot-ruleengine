@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -81,7 +82,7 @@ public class PersistService {
         List<MessageFlowTracker> messageFlowTrackers1 = messageFlowTrackerDaoService.saveAll(messageFlowTrackers);
 
 
-        if (!transaction.getOutbounds().isEmpty()) {
+        if (Objects.nonNull(transaction.getOutbounds()) && !transaction.getOutbounds().isEmpty()) {
             outboundMessageDaoService.saveOutboundMessages(messageFlowTrackers1, transaction.getOutbounds());
         }
 

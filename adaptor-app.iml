@@ -120,8 +120,8 @@
     <orderEntry type="library" name="Maven: org.webjars:swagger-ui:4.18.1" level="project" />
     <orderEntry type="library" name="Maven: org.webjars:webjars-locator-core:0.55" level="project" />
     <orderEntry type="library" name="Maven: io.github.classgraph:classgraph:4.8.149" level="project" />
-    <orderEntry type="module" module-name="adaptor-databse" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.oracle.database.jdbc:ojdbc8:21.9.0.0" level="project" />
+    <orderEntry type="module" module-name="adaptor-databse" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.oracle.database.jdbc:ojdbc8:21.9.0.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.liquibase:liquibase-core:4.24.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.opencsv:opencsv:5.8" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.13.0" level="project" />

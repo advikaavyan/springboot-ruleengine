@@ -1,6 +1,7 @@
 package com.example.poc.flow.processor.impl;
 
 
+import com.example.poc.flow.mapper.MessageDataMapper;
 import com.example.poc.flow.model.base.*;
 import com.example.poc.flow.model.base.impl.StpContext;
 import com.example.poc.flow.model.base.impl.StpTransactionImpl;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -20,11 +22,14 @@ import java.util.ArrayList;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class STPContextBuilder implements ContextBuilder {
+
+  private final MessageDataMapper messageDataMapper;
     @Override
     public BaseContext buildContext(Message message) {
         log.info("Inside STPContextBuilder");
-        MessageDataDTO messageDataDTO = toMessageDataDTO(message);
+        MessageDataDTO messageDataDTO = messageDataMapper.toMessageDataDTO(message);
         BaseContext baseContext = createContext(messageDataDTO);
         return baseContext;
     }
@@ -32,7 +37,7 @@ public class STPContextBuilder implements ContextBuilder {
     private BaseContext createContext(MessageDataDTO messageDataDTO) {
         BaseContext baseContext = StpContext.builder().build();
         TransactionCollection transactionCollection = new TransactionCollectionImpl();
-        
+
         Transaction transaction = StpTransactionImpl.builder()
                 .messageData(messageDataDTO)
                 .inboundMessageDTO(new InboundMessageDTO())
@@ -47,7 +52,7 @@ public class STPContextBuilder implements ContextBuilder {
         return baseContext;
     }
 
-    private MessageDataDTO toMessageDataDTO(Message<String> message) {
+    /*private MessageDataDTO toMessageDataDTO(Message<String> message) {
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.registerModule(new JavaTimeModule());
@@ -61,6 +66,6 @@ public class STPContextBuilder implements ContextBuilder {
         message1.setRawMessage(message.getContent());
         return message1;
 
-    }
+    }*/
 
 }

@@ -1,12 +1,15 @@
 package com.example.poc.flow.processor.impl;
 
 
-import com.example.poc.flow.helper.EntityToDTOs;
+import com.example.poc.flow.helper.TransactionMapper;
 import com.example.poc.flow.model.base.*;
 import com.example.poc.flow.model.base.impl.TransactionCollectionImpl;
 import com.example.poc.flow.model.dto.MatchingSignatureDTO;
+import com.example.poc.flow.model.entity.InboundMessage;
 import com.example.poc.flow.model.entity.MatchingSignature;
+import com.example.poc.flow.ser.InboundMessageDaoService;
 import com.example.poc.flow.ser.MatchingService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,16 +20,14 @@ import java.util.Objects;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class MatchingProcessor extends AbstractProcessor {
 
     private final MatchingService matchingService;
-
+    private final InboundMessageDaoService inboundMessageDaoService;
     @Autowired
-    EntityToDTOs entityToDTOs;
+    TransactionMapper entityToDTOs;
 
-    public MatchingProcessor(MatchingService matchingService) {
-        this.matchingService = matchingService;
-    }
 
     @Override
     public BaseContext execute(BaseContext baseContext) {
@@ -49,8 +50,14 @@ public class MatchingProcessor extends AbstractProcessor {
                     return mergeCurrentContextWithLinkedTransactionData(baseContext, linkedMatchingSignatures);
                 }
             } else {
-                log.error("Duplicate Trades found, now going to throw exceptions..........................................");
-                throwException(matchingService.ListToMap(matchingSignatures));
+
+                if (matchingSignatures.size() == 1 && matchingSignatures.get(0).getMatchingKey() == MatchingKey.NEWM_BASKET) {
+                    log.info("Only NEWM_BASKET Present, means Current Trade is Amend Trade.");
+                    return mergeCurrentContextWithLinkedTransactionData11(baseContext, matchingSignatures);
+                } else {
+                    log.error("Duplicate Trades found, now going to throw exceptions..........................................");
+                    throwException(matchingService.ListToMap(matchingSignatures));
+                }
             }
         }
         return baseContext;
@@ -72,10 +79,30 @@ public class MatchingProcessor extends AbstractProcessor {
         }
     }
 
+    private BaseContext mergeCurrentContextWithLinkedTransactionData11(BaseContext baseContext, List<MatchingSignature> linkedMatchingSignatures) {
+        log.info("Before " + "-------------------" + baseContext.getTransactionKeys());
+
+        for (MatchingSignature matchingSignature : linkedMatchingSignatures) {
+
+            List<InboundMessage> inboundMessages = inboundMessageDaoService.findByMessageIdentifier(matchingSignature.getInboundMessage().getMessageIdentifier());
+            String messageFunction = matchingSignature.getMatchingKey().toString().substring(0, matchingSignature.getMatchingKey().toString().indexOf("_BASKET"));
+            Transaction transaction = entityToDTOs.toTransaction(matchingSignature);
+            TransactionCollection transactionCollection = new TransactionCollectionImpl();
+            transactionCollection.appendTransaction(transaction);
+            baseContext.addTransactions(TransactionKey.valueOf(messageFunction), transactionCollection);
+        }
+
+        log.info("After " + "-------------------" + baseContext.getTransactionKeys());
+
+        return baseContext;
+    }
+
     private BaseContext mergeCurrentContextWithLinkedTransactionData(BaseContext baseContext, List<MatchingSignature> linkedMatchingSignatures) {
         log.info("Before " + "-------------------" + baseContext.getTransactionKeys());
 
         for (MatchingSignature matchingSignature : linkedMatchingSignatures) {
+
+
             String messageFunction = matchingSignature.getMatchingKey().toString().substring(0, matchingSignature.getMatchingKey().toString().indexOf("_BASKET"));
             Transaction transaction = entityToDTOs.toTransaction(matchingSignature);
             TransactionCollection transactionCollection = new TransactionCollectionImpl();

@@ -14,4 +14,12 @@ public interface MatchingSignatureRepository extends JpaRepository<MatchingSigna
 
     @Query("SELECT ms FROM MatchingSignature ms WHERE ms.matchingKey IN :matchingKeys AND ms.matchingValue IN :matchingValues")
     List<MatchingSignature> findByMatchingKeyInAndMatchingValueIn(@Param("matchingKeys") List<MatchingKey> matchingKeys, @Param("matchingValues") List<String> matchingValues);
+
+/*    @Query("SELECT ms FROM MatchingSignature ms " +
+            "JOIN FETCH ms.inboundMessage im " +
+            "JOIN FETCH im.messageFlowTracker " +
+            "WHERE ms.matchingKey IN :matchingKeys " +
+            "AND ms.matchingValue IN :matchingValues")
+    List<MatchingSignature> findByMatchingKeyInAndMatchingValueIn(@Param("matchingKeys") List<MatchingKey> matchingKeys, @Param("matchingValues") List<String> matchingValues);*/
+
 }

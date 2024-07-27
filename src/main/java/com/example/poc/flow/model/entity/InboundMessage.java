@@ -31,12 +31,10 @@ public class InboundMessage {
 
     @Column(name = "RECEIVED_AT")
     private LocalDateTime receivedAt;
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "MESSAGE_ID")
     private List<MessageFlowTracker> messageFlowTrackers;
 
-   /* @OneToOne
-    @JoinColumn(name = "MESSAGE_ID")
-    private MessageData messageData;*/
 
 }

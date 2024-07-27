@@ -1,37 +1,45 @@
 package com.example.poc.flow.mapper;
 
+import com.example.poc.flow.model.base.Message;
+import com.example.poc.flow.model.dto.MessageDataDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MessageDataMapper {
 
-    /*@Autowired
-    private InboundMessageMapper inboundMessageMapper;
+    public MessageDataDTO toMessageDataDTO(Message<String> message) {
+        ObjectMapper objectMapper = new ObjectMapper();
 
-    public MessageData toEntity(MessageDataDTO dto, InboundMessage inboundMessage) {
-        if (dto == null) {
-            return null;
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        MessageDataDTO message1 = null;
+        try {
+            message1 = objectMapper.readValue(message.getContent(), MessageDataDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
+        message1.setRawMessage(message.getContent());
+        return message1;
 
-        MessageData entity = new MessageData();
-        entity.setInboundMessage(inboundMessage);
-        entity.setAccountNumber(dto.getAccountNumber());
-
-        return entity;
     }
 
-    public MessageDataDTO toDTO(MessageData entity) {
-        if (entity == null) {
-            return null;
+    public MessageDataDTO toMessageDataDTO(String message) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        MessageDataDTO message1 = null;
+        try {
+            message1 = objectMapper.readValue(message, MessageDataDTO.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
+        message1.setRawMessage(message);
+        return message1;
 
-        MessageDataDTO dto = new MessageDataDTO();
-        dto.setMessageId(entity.getMessageDataId());
-        dto.setMessageId(entity.getInboundMessage().getMessageId());
-        dto.setAccountNumber(entity.getAccountNumber());
-        dto.setTradeDate(entity.getTradeDate());
-        dto.setSenderBic(entity.getSenderBic());
-
-        return dto;
-    }*/
+    }
 }

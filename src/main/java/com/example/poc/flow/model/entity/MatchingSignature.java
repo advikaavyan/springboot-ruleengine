@@ -8,6 +8,8 @@ import lombok.Data;
 @Table(name = "MATCHING_SIGNATURE")
 @Data
 public class MatchingSignature {
+/*
+    private final String FORMAT = "%-20s %-10s %-30s%n", "Name", "Age", "Email"*/
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 

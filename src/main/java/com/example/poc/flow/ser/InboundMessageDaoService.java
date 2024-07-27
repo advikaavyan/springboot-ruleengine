@@ -16,6 +16,10 @@ public class InboundMessageDaoService {
         return repository.findAll();
     }
 
+    public List<InboundMessage> findByMessageIdentifier(String messageIdentifier) {
+        return repository.findByMessageIdentifier(messageIdentifier);
+    }
+
     public Optional<InboundMessage> findById(Long id) {
         return repository.findById(id);
     }

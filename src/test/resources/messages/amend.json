@@ -1,0 +1,18 @@
+{
+  "date": "2023-07-14T10:15:30Z",
+  "accountNumber": "TestAccount",
+  "messageFunction": "NEWM",
+  "messageType": "PAYMENT",
+  "amount": 1500.00,
+  "currency": "USD",
+  "version": 7,
+  "legs": [
+    "ASSET",
+    "GST",
+    "EXPENSE"
+  ],
+  "source": "SWF",
+  "uuid": "ABCD1234_1_A",
+
+  "messageIdentifier": "TMS00001"
+}
