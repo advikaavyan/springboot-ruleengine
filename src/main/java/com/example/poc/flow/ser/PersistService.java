@@ -11,6 +11,7 @@ import com.example.poc.flow.model.entity.MatchingSignature;
 import com.example.poc.flow.model.entity.MessageFlowTracker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,7 @@ public class PersistService {
         this.outboundMessageMapper = outboundMessageMapper;
     }
 
+    @Transactional
     public void persist(BaseContext baseContext) {
 
         Transaction transaction = getLatestTransaction(baseContext);

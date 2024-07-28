@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 @Slf4j
@@ -83,6 +84,9 @@ public class MatchingProcessor extends AbstractProcessor {
         log.info("Before " + "-------------------" + baseContext.getTransactionKeys());
 
         for (MatchingSignature matchingSignature : linkedMatchingSignatures) {
+            Optional<InboundMessage> inboundMessages111 = inboundMessageDaoService.findById(matchingSignature.getInboundMessage().getMessageId());
+
+            System.out.println("------------QQQQQQQQQQQQQQQQQQQQQQQQ "+inboundMessages111.get().getMessageFlowTrackers().size());
 
             List<InboundMessage> inboundMessages = inboundMessageDaoService.findByMessageIdentifier(matchingSignature.getInboundMessage().getMessageIdentifier());
             String messageFunction = matchingSignature.getMatchingKey().toString().substring(0, matchingSignature.getMatchingKey().toString().indexOf("_BASKET"));

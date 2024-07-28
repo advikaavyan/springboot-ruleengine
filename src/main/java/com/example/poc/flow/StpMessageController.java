@@ -6,6 +6,7 @@ import com.example.poc.flow.model.base.impl.MessageImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ public class StpMessageController {
     }
 
     @PostMapping(consumes = "application/json", produces = "application/json")
+    @Transactional
     public ResponseEntity createMessage(@RequestBody String inMessage) {
         log.info("Trade Received {}....................");
         Long startTime = System.currentTimeMillis();

@@ -32,7 +32,7 @@ public class InboundMessage {
     @Column(name = "RECEIVED_AT")
     private LocalDateTime receivedAt;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "MESSAGE_ID")
     private List<MessageFlowTracker> messageFlowTrackers;
 

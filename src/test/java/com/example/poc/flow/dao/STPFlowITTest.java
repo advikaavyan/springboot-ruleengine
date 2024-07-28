@@ -1,12 +1,10 @@
 package com.example.poc.flow.dao;
 
 import com.example.poc.flow.StpMessageController;
-import com.example.poc.flow.model.entity.MessageFlowTracker;
 import com.example.poc.flow.ser.InboundMessageDaoService;
 import com.example.poc.flow.ser.MessageFlowTrackerDaoService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -18,9 +16,15 @@ import java.nio.file.Paths;
 
 @SpringBootTest
 @ActiveProfiles("test")
+//@ContextConfiguration(classes = {AdaptorApp.class, TestLiquibaseConfig.class})
+/*@ContextConfiguration(classes = TestLiquibaseConfig.class)*/
+
+// when @Transactional //java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because "entities" is null
 /*@ContextConfiguration(classes = {AdaptorApp.class, LiquibaseTestConfig.class})*/
-@Transactional
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+/*@Transactional
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)*/
+
+/*@Transactional*/
 public class STPFlowITTest {
 
 
@@ -30,24 +34,31 @@ public class STPFlowITTest {
     @Autowired
     private InboundMessageDaoService inboundMessageDaoService;
     @Autowired
-    private MessageFlowTrackerDaoService  messageFlowTrackerDaoService;
-    @Test
-    public void playNewM() {
+    private MessageFlowTrackerDaoService messageFlowTrackerDaoService;
 
-        String firstSTPMessage = "src/test/resources/messages/createLegs.json";
-        stpMessageController.createMessage(getMessage(firstSTPMessage));
+    private String NEWM_TRADE = "src/test/resources/messages/newm.json";
+
+    private String NEWM_HEADER_DUPE = "src/test/resources/messages/newm_HeaderDupe.json";
+    private String AMEND_TRADE = "src/test/resources/messages/amend.json";
+
+
+    private String CANC_TRADE = "src/test/resources/messages/canc.json";
+
+    @Test
+    @Transactional
+    public void playNewM() {
+        stpMessageController.createMessage(getMessage(NEWM_TRADE));
         System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
     }
 
     @Test
     public void playSameMessageTwice() {
 
-        String firstSTPMessage = "src/test/resources/messages/createLegs.json";
-        stpMessageController.createMessage(getMessage(firstSTPMessage));
+        stpMessageController.createMessage(getMessage(NEWM_TRADE));
         System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
 
         Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            stpMessageController.createMessage(getMessage(firstSTPMessage));
+            stpMessageController.createMessage(getMessage(NEWM_TRADE));
         });
 
         String expectedSubstring = "Duplicate Message: BME_HEADER_DUPE Already Trade with uuid = ";
@@ -58,45 +69,62 @@ public class STPFlowITTest {
     @Test
     public void playSameMessageTwiceJustUpdateHeaderUUID() {
 
-        String firstSTPMessage = "src/test/resources/messages/createLegs.json";
-        stpMessageController.createMessage(getMessage(firstSTPMessage));
+        stpMessageController.createMessage(getMessage(NEWM_TRADE));
         System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
 
-        String sTPMessageWithOnlyUUIDChanged = "src/test/resources/messages/createLegsOnlyUuidChanged.json";
+
         Exception exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            stpMessageController.createMessage(getMessage(sTPMessageWithOnlyUUIDChanged));
+            stpMessageController.createMessage(getMessage(NEWM_HEADER_DUPE));
         });
         String expectedSubstring = "Duplicate Message: BASKET_VERSION_DUPE- NEWM Already Trade with same uuid, basket and version";
         String actualMessage = exception.getMessage();
         Assertions.assertTrue(actualMessage.contains(expectedSubstring), "Exception message does not contain expected substring.");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + messageFlowTrackerDaoService.findAll().size());
     }
 
     @Test
-    public void playSameMessageWithNewUIIDAndVersion() {
-
-        String firstSTPMessage = "src/test/resources/messages/createLegs.json";
-        stpMessageController.createMessage(getMessage(firstSTPMessage));
-        System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
-
-        String sTPMessageWithOnlyUUIDChanged = "src/test/resources/messages/createLegsUuidVersionChanged.json";
-        stpMessageController.createMessage(getMessage(sTPMessageWithOnlyUUIDChanged));
-        Assertions.assertTrue((inboundMessageDaoService.findAll().size() == 2), "Two Trades to be present in system");
-
-    }
-
-    @Test
+    @Transactional
     public void playAmend() {
 
-        String firstSTPMessage = "src/test/resources/messages/createLegs.json";
-        stpMessageController.createMessage(getMessage(firstSTPMessage));
+        stpMessageController.createMessage(getMessage(NEWM_TRADE));
+
+        stpMessageController.createMessage(getMessage(AMEND_TRADE));
+        Assertions.assertTrue((inboundMessageDaoService.findAll().size() == 2), "Two Trades to be present in system");
+    }
+
+    @Test
+    public void playAmend1() {
+
+        stpMessageController.createMessage(getMessage(NEWM_TRADE));
         System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
         System.out.println("NO LEGS PRESENT IN THE SYSTEM " + messageFlowTrackerDaoService.findAll().size());
 
-
-        String sTPMessageWithOnlyUUIDChanged = "src/test/resources/messages/createLegsUuidVersionChanged.json";
-        stpMessageController.createMessage(getMessage(sTPMessageWithOnlyUUIDChanged));
+  /*   List<MessageFlowTracker> aaaa = messageFlowTrackerDaoService.findAll();
+     for(MessageFlowTracker messageFlowTracker : aaaa){
+         System.out.println("+++++++++++++++++++++++++++++ "+messageFlowTracker.getInboundMessage());
+     }
+*/
+        stpMessageController.createMessage(getMessage(AMEND_TRADE));
         Assertions.assertTrue((inboundMessageDaoService.findAll().size() == 2), "Two Trades to be present in system");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + messageFlowTrackerDaoService.findAll().size());
+    }
 
+    @Test
+    public void playCanc() {
+        stpMessageController.createMessage(getMessage(CANC_TRADE));
+        System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + messageFlowTrackerDaoService.findAll().size());
+    }
+
+    @Test
+    public void playNewmThenCanc() {
+
+        stpMessageController.createMessage(getMessage(NEWM_TRADE));
+        System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
+
+        stpMessageController.createMessage(getMessage(CANC_TRADE));
+        System.out.println("NO TRADE PRESENT IN THE SYSTEM " + inboundMessageDaoService.findAll().size());
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA " + messageFlowTrackerDaoService.findAll().size());
     }
 
 

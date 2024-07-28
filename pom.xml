@@ -1,114 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-<modelVersion>4.0.0</modelVersion>
-<parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.2.4</version>
-    <relativePath/>
-</parent>
-<groupId>com.advikavyan.examples</groupId>
-<artifactId>adaptor-app</artifactId>
-<version>1.0.8</version>
-<name>adaptor-app</name>
-<description>adaptor-app</description>
-<properties>
-    <java.version>17</java.version>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-</properties>
-<dependencies>
-    <dependency>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
         <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-    </dependency>
-
-
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <scope>test</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>8.0.31</version>
-    </dependency>
-    <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-jdbc</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        <version>2.0.4</version>
-    </dependency>
-
-
-    <dependency>
-        <groupId>com.advikavyan.examples</groupId><!-- Change to your group ID -->
-        <artifactId>adaptor-database</artifactId>
-        <version>1.1.1</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.liquibase</groupId>
-        <artifactId>liquibase-core</artifactId>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-        <scope>test</scope>
-    </dependency>
-</dependencies>
-
-
-<build>
-    <plugins>
-        <plugin>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.4</version>
+        <relativePath/>
+    </parent>
+    <groupId>com.advikavyan.examples</groupId>
+    <artifactId>adaptor-app</artifactId>
+    <version>1.0.8</version>
+    <name>adaptor-app</name>
+    <description>adaptor-app</description>
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-        </plugin>
-       <!-- <plugin>
-            <groupId>com.google.cloud.tools</groupId>
-            <artifactId>jib-maven-plugin</artifactId>
-            <version>3.4.0</version>
-            <configuration>
-                <to>
-                   &lt;!&ndash; <image>docker.io/advikaavyan/adaptor-app-${project.version}</image>&ndash;&gt;
-                    <image>docker.io/advikaavyan/adaptor-app</image>
-                </to>
-            </configuration>
-        </plugin>-->
-    </plugins>
-</build>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.31</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.4</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.advikavyan.examples</groupId><!-- Change to your group ID -->
+            <artifactId>adaptor-database</artifactId>
+            <version>1.1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <!--   <scope>test</scope>-->
+        </dependency>
+    </dependencies>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- <plugin>
+                 <groupId>com.google.cloud.tools</groupId>
+                 <artifactId>jib-maven-plugin</artifactId>
+                 <version>3.4.0</version>
+                 <configuration>
+                     <to>
+                        &lt;!&ndash; <image>docker.io/advikaavyan/adaptor-app-${project.version}</image>&ndash;&gt;
+                         <image>docker.io/advikaavyan/adaptor-app</image>
+                     </to>
+                 </configuration>
+             </plugin>-->
+        </plugins>
+    </build>
 
     <profiles>
 
@@ -125,20 +126,20 @@
             </activation>
             <build>
 
-                    <plugins>
+                <plugins>
 
-                        <plugin>
-                            <groupId>com.google.cloud.tools</groupId>
-                            <artifactId>jib-maven-plugin</artifactId>
-                            <version>3.4.0</version>
-                           <!-- <configuration>
-                                <to>
-                                    &lt;!&ndash; <image>docker.io/advikaavyan/adaptor-app-${project.version}</image>&ndash;&gt;
-                                    <image>docker.io/advikaavyan/adaptor-app</image>
-                                </to>
-                            </configuration>-->
-                        </plugin>
-                    </plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>3.4.0</version>
+                        <!-- <configuration>
+                             <to>
+                                 &lt;!&ndash; <image>docker.io/advikaavyan/adaptor-app-${project.version}</image>&ndash;&gt;
+                                 <image>docker.io/advikaavyan/adaptor-app</image>
+                             </to>
+                         </configuration>-->
+                    </plugin>
+                </plugins>
 
 
             </build>
