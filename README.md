@@ -1,1 +1,1 @@
-# adaptor-app
+# Generic Rule Engine

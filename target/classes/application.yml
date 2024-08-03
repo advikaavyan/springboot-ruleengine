@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: adaptor-app
+info.app.name: springboot-ruleengine
+info.app.version: 1.0.8
+
+application.title:  springboot-ruleengine
+application.version: 1.0.8
+server:
+  port: 8080
