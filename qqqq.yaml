@@ -1,8 +1,0 @@
-apiVersion: skaffold/v2beta19
-kind: Config
-metadata:
-  name: adaptor-app
-deploy:
-  kustomize:
-    paths:
-      - .
