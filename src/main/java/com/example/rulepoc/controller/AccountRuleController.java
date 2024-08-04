@@ -25,40 +25,19 @@ public class AccountRuleController {
     private final AccountRuleService accountRuleService;
     private final RequestMapper requestMapper;
 
-  /*  @PostMapping(consumes = "application/json", produces = "application/json")
-    @Transactional
-    public ResponseEntity processRuleRequest(@RequestBody String inMessage) {
-        AccountModel accountModel = transformToAccountModel(inMessage);
-        accountRuleService.process(accountModel);
-        return new ResponseEntity<>(HttpStatus.CREATED);
-    }*/
-
     @PostMapping(consumes = "application/json", produces = "application/json")
     @Transactional
     public ResponseEntity processRuleRequest(@RequestBody Map jsonMessage) {
+        log.info("Request received....");
+        long startTime = System.currentTimeMillis();
         AccountModel accountModel = requestMapper.transformToAccountModel(jsonMessage);
         if (Objects.nonNull(accountModel)) {
             accountRuleService.process(accountModel);
+            log.info("Request full filled in {} :MS ", System.currentTimeMillis() - startTime);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
-
+        log.info("Request failed  in {} :MS ", System.currentTimeMillis() - startTime);
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    private AccountModel transformToAccountModel(Map jsonMessage) {
-       /* if (inMessage.startsWith("Coac")) {
-            AccountModelCoac accountModelCoac = new AccountModelCoac();
-            accountModelCoac.setAccountNumber("12345");
-            accountModelCoac.setCoacAttribute1("Specific Data");
-            return accountModelCoac;
-        }
-
-        if (inMessage.startsWith("Otc")) {
-            AccountModelCoac accountModelCoac = new AccountModelCoac();
-            accountModelCoac.setAccountNumber("12345");
-            accountModelCoac.setCoacAttribute1("Specific Data");
-            return accountModelCoac;
-        }*/
-        return null;
-    }
 }

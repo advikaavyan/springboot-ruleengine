@@ -1,15 +1,21 @@
 package com.example.rulepoc.rule;
 
-import com.example.rulepoc.ValidationException;
 import com.example.rulepoc.model.AccountModel;
-import com.example.rulepoc.rule.Rule;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class AccountRule implements Rule {
     @Override
-    public void apply(AccountModel message) throws ValidationException {
-        // Common account number validation logic
-        if (message.getAccountNumber() == null || message.getAccountNumber().isEmpty()) {
-            throw new ValidationException("Account number is invalid");
-        }
+    public void apply(AccountModel message) {
+        runCommonAccountRule1(message);
+        runCommonAccountRule2(message);
+    }
+
+    private void runCommonAccountRule1(AccountModel message) {
+        log.info("runCommonAccountRule1 executed");
+    }
+
+    private void runCommonAccountRule2(AccountModel message) {
+        log.info("runCommonAccountRule2 executed");
     }
 }

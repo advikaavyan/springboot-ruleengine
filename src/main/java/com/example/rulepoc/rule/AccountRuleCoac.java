@@ -1,18 +1,27 @@
 package com.example.rulepoc.rule;
 
-import com.example.rulepoc.ValidationException;
 import com.example.rulepoc.model.AccountModel;
 import com.example.rulepoc.model.AccountModelCoac;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class AccountRuleCoac implements Rule {
     @Override
-    public void apply(AccountModel message) throws ValidationException {
+    public void apply(AccountModel message) {
         if (message instanceof AccountModelCoac) {
-            AccountModelCoac messageTypeA = (AccountModelCoac) message;
-            // Specific validation logic for MessageTypeA
-            if (messageTypeA.getCoacAttribute1() == null || messageTypeA.getCoacAttribute1().isEmpty()) {
-                throw new ValidationException("Specific attribute A is invalid");
-            }
+            AccountModelCoac accountModelCoac = (AccountModelCoac) message;
+            log.info("Ready to run COAC specific rules....");
+            runCoacAccountRule1(accountModelCoac);
+            runCoacAccountRule2(accountModelCoac);
         }
     }
+
+    private void runCoacAccountRule1(AccountModelCoac message) {
+        log.info("runCoacAccountRule1 executed");
+    }
+
+    private void runCoacAccountRule2(AccountModelCoac message) {
+        log.info("runCoacAccountRule2 executed");
+    }
+
 }

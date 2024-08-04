@@ -1,6 +1,6 @@
 package com.example.rulepoc.rule;
 
-import com.example.rulepoc.ValidationException;
+import com.example.rulepoc.RuleException;
 import com.example.rulepoc.model.AccountModel;
 
 public class RuleExecutor {
@@ -10,7 +10,7 @@ public class RuleExecutor {
         this.ruleEngine = ruleEngine;
     }
 
-    public void execute(AccountModel message) throws ValidationException {
+    public void execute(AccountModel message) throws RuleException {
         ruleEngine.applyRules(message);
     }
 }

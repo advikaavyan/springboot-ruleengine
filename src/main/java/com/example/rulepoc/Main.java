@@ -24,7 +24,7 @@ public class Main {
             ruleExecutor.execute(message);
 
             System.out.println("Validation passed.");
-        } catch (ValidationException e) {
+        } catch (RuleException e) {
             System.out.println("Validation failed: " + e.getMessage());
         }
     }

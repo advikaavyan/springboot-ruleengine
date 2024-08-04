@@ -1,6 +1,6 @@
 spring:
   application:
-    name: adaptor-app
+    name: myrule-api
 info.app.name: @project.artifactId@
 info.app.version: @project.version@
 
